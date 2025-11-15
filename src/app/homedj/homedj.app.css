@@ -1,0 +1,541 @@
+/* Barra superior de navegación con botones modernos - FIJA EN LA PARTE SUPERIOR */
+.top-bar-menu {
+    width: 100vw;
+    background: var(--color-surface);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+    padding: 0.5rem 0;
+    position: fixed;
+    /* Cambiado a fixed para que siempre esté arriba */
+    top: 0;
+    left: 0;
+    z-index: 4000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menú horizontal de botones compactos */
+.dj-perfil-menu {
+    display: flex;
+    gap: 0.7rem;
+    margin: 0.5rem;
+}
+
+/* Botones modernos con icono visible y texto que aparece al hover */
+.modern-back-btn {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: all 0.3s ease;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.modern-back-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: auto;
+    padding: 0.8rem 1.2rem;
+}
+
+.menu-icon {
+    font-size: 1.3rem;
+}
+
+.menu-text {
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: 0;
+    overflow: hidden;
+    margin-left: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modern-back-btn:hover .menu-text {
+    max-width: 200px;
+    margin-left: 0.5rem;
+    opacity: 1;
+}
+
+/* Icono dentro de los botones del menú superior */
+.menu-icon-bar {
+    font-size: 1.3rem;
+    margin-right: 0.2rem;
+    filter: drop-shadow(0 2px 4px #23243a44);
+}
+
+/* Overlay para fondo del menú hamburguesa en móvil */
+padding: 0;
+}
+
+/* Wrapper oculto para el botón de agregar servicio */
+.add-service-btn-wrapper {
+    display: none;
+}
+
+/* Tarjeta individual de servicio */
+.service-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #292a3d;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
+}
+
+/* Información del servicio */
+.service-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* Acciones de cada servicio (editar, eliminar) */
+.service-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+/* Icono de edición de servicio */
+.edit-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #b3aefc;
+    margin-bottom: 0.2rem;
+}
+
+/* Botón eliminar servicio */
+.delete-btn {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 0.2rem;
+}
+
+/* Botón guardar servicio */
+.save-btn {
+    background: #2ecc40;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Fondo principal del Home DJ, con degradado y fuente moderna */
+.homedj-background {
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    padding-top: 70px;
+    /* Espacio para la barra fija superior */
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    color: #fff;
+    /* Puedes usar un color sólido o un degradado como en login: */
+    background: linear-gradient(120deg, #131228 1%, #00c6fb 90%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Contenedor principal del calendario */
+.calendar-container {
+    background: transparent;
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+}
+
+/* Encabezado del calendario, con fondo y alineación */
+.calendar-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.2rem 1.5rem 0.5rem 1.5rem;
+    background: #18192b;
+    box-sizing: border-box;
+}
+
+/* Título del calendario */
+.calendar-header h2 {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Icono de menú (ya no se usa, pero se mantiene por si se reutiliza) */
+.menu-icon {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+/* Sección principal del calendario, tarjeta con sombra */
+.calendar-section {
+    width: 100%;
+    max-width: 400px;
+    margin: 1.5rem auto 0 auto;
+    background: #23243a;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+}
+
+/* Mockup visual del calendario */
+.calendar-mockup {
+    margin-bottom: 1.2rem;
+}
+
+/* Barra de mes del calendario, con flechas y nombre */
+.calendar-month {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+/* Flechas para cambiar de mes */
+.month-arrow {
+    background: none;
+    border: none;
+    color: #b3aefc;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: color 0.2s;
+}
+
+/* Hover para flechas de mes */
+.month-arrow:hover {
+    color: #fff;
+}
+
+/* Grid de días del calendario */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3rem;
+    margin-bottom: 0.7rem;
+}
+
+/* Etiquetas de los días de la semana */
+.calendar-day-label {
+    color: #b3aefc;
+    font-size: 0.95rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Celda individual de cada día */
+.calendar-day {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 auto;
+}
+
+/* Día disponible */
+.day-available {
+    background: #2ecc40;
+    color: #fff;
+}
+
+/* Día ocupado */
+.day-busy {
+    background: #e53935;
+    color: #fff;
+}
+
+/* Día tentativo */
+.day-tentative {
+    background: #ffb300;
+    color: #fff;
+}
+
+/* Día actual */
+.day-today {
+    border: 2px solid #b3aefc;
+}
+
+/* Leyenda de colores del calendario */
+.calendar-legend {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Estilo base de cada leyenda */
+.legend {
+    padding: 0.3rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+/* Leyenda: disponible */
+.legend.available {
+    background: #2ecc40;
+    color: #fff;
+}
+
+/* Leyenda: ocupado */
+.legend.busy {
+    background: #e53935;
+    color: #fff;
+}
+
+/* Leyenda: tentativo */
+.legend.tentative {
+    background: #ffb300;
+    color: #fff;
+}
+
+/* Leyenda seleccionada */
+.legend.selected {
+    outline: 2px solid #fff;
+    box-shadow: 0 0 0 2px #b3aefc;
+}
+
+/* Sección de servicios del DJ */
+.service-section {
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto 0 auto;
+    background: #23243a;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+}
+
+/* Encabezado de la sección de servicios */
+.service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Título de la sección de servicios */
+.service-header h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* Botón para agregar servicio */
+.add-service-btn {
+    background: #007aff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-left: 0.7rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Hover del botón agregar servicio */
+.add-service-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   SECCIÓN DE NOTIFICACIONES
+   ============================================================ */
+
+/* Sección de notificaciones */
+.notifications-section {
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    -webkit-backdrop-filter: blur(10px);
+    /* Soporte para Safari */
+    backdrop-filter: blur(10px);
+}
+
+/* Lista de notificaciones */
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Mensaje de no hay notificaciones */
+.no-notifications {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.no-notifications p {
+    margin: 0;
+    font-style: italic;
+}
+
+/* Tarjeta de notificación individual */
+.notification-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 3px solid #007aff;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.notification-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+/* Encabezado de la notificación */
+.notification-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.7rem;
+}
+
+/* Ícono de notificación */
+.notification-icon {
+    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 122, 255, 0.2);
+    border-radius: 50%;
+}
+
+/* Información de la notificación */
+.notification-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.notification-info strong {
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+/* Fecha de la notificación */
+.notification-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+/* Mensaje de la notificación */
+.notification-message {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+/* Información de contacto */
+.notification-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    background: rgba(0, 122, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 0.7rem;
+}
+
+/* Etiqueta de contacto */
+.contact-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+/* Teléfono de contacto */
+.contact-phone {
+    color: #007aff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.contact-phone:hover {
+    color: #0096ff;
+    text-decoration: underline;
+}
+
+/* Botón para eliminar notificación */
+.notification-delete-btn {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: rgba(0, 200, 100, 0.2);
+    color: #00ff88;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.notification-delete-btn:hover {
+    background: rgba(0, 200, 100, 0.4);
+    transform: scale(1.1);
+}

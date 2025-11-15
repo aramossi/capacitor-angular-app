@@ -1,0 +1,156 @@
+<div class="register-container">
+    <h2 class="register-title">Crear cuenta en<br><span class="logo-img"><img src="assets/logo.jpg"
+                alt="SK Music Logo" /></span></h2>
+    <div class="register-type">
+        <button class="type-btn" [class.active]="userType === 'dj'" (click)="setType('dj')">DJ</button>
+        <button class="type-btn" [class.active]="userType === 'cliente'" (click)="setType('cliente')">Cliente</button>
+        <button class="type-btn" [class.active]="userType === 'promotor'"
+            (click)="setType('promotor')">Promotor</button>
+    </div>
+    <form class="register-form" *ngIf="userType === 'dj'" (ngSubmit)="onRegister($event)">
+        <label for="email">Correo electrónico</label>
+        <div class="input-group">
+            <input id="email" type="email" placeholder="tu@email.com" [(ngModel)]="email" name="email" />
+        </div>
+        <label for="nombre">Nombre</label>
+        <div class="input-group">
+            <input id="nombre" type="text" placeholder="Tu nombre" [(ngModel)]="nombre" name="nombre" />
+        </div>
+        <label for="apellido">Apellido</label>
+        <div class="input-group">
+            <input id="apellido" type="text" placeholder="Tu apellido" [(ngModel)]="apellido" name="apellido" />
+        </div>
+        <label for="dni">DNI</label>
+        <div class="input-group dni-group">
+            <input id="dni" type="text" placeholder="DNI (8 dígitos)" [(ngModel)]="dniDj" name="dniDj" maxlength="8"
+                pattern="[0-9]*" inputmode="numeric" (input)="checkDniDj()" />
+            <span *ngIf="dniDjYaRegistrado" class="dni-error">DNI ya utilizado</span>
+            <span *ngIf="dniDj && dniDjInvalido" class="dni-error">DNI inválido</span>
+        </div>
+        <label for="distrito">Distrito</label>
+        <div class="input-group">
+            <input id="distrito" type="text" placeholder="Distrito" [(ngModel)]="distrito" name="distrito" />
+        </div>
+        <label for="provincia">Provincia</label>
+        <div class="input-group">
+            <input id="provincia" type="text" placeholder="Provincia" [(ngModel)]="provincia" name="provincia" />
+        </div>
+        <label for="departamento">Departamento</label>
+        <div class="input-group">
+            <input id="departamento" type="text" placeholder="Departamento" [(ngModel)]="departamento"
+                name="departamento" />
+        </div>
+        <label for="password">Contraseña</label>
+        <div class="input-group">
+            <input id="password" type="password" placeholder="Crea una contraseña" [(ngModel)]="password"
+                name="password" />
+            <span class="icon eye">👁️</span>
+        </div>
+        <label for="confirm">Confirmar contraseña</label>
+        <div class="input-group">
+            <input id="confirm" type="password" placeholder="Confirma tu contraseña" [(ngModel)]="confirm"
+                name="confirm" />
+            <span class="icon eye">🙈</span>
+        </div>
+        <div *ngIf="errorMsg" class="register-error-modal">
+            <div class="modal-content">
+                <span class="close-btn" (click)="errorMsg = ''">&times;</span>
+                {{ errorMsg }}
+            </div>
+        </div>
+        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <button type="submit" class="register-btn">Registrar DJ AHORA</button>
+    </form>
+    <form class="register-form" *ngIf="userType === 'cliente'" (ngSubmit)="onRegister($event)">
+        <label for="email">Correo electrónico</label>
+        <div class="input-group">
+            <input id="email" type="email" placeholder="tu@email.com" [(ngModel)]="email" name="email" />
+        </div>
+        <label for="nombre">Nombre</label>
+        <div class="input-group">
+            <input id="nombre" type="text" placeholder="Tu nombre" [(ngModel)]="nombre" name="nombre" />
+        </div>
+        <label for="apellido">Apellido</label>
+        <div class="input-group">
+            <input id="apellido" type="text" placeholder="Tu apellido" [(ngModel)]="apellido" name="apellido" />
+        </div>
+        <label for="dni">DNI</label>
+        <div class="input-group dni-group">
+            <input id="dni" type="text" placeholder="DNI (8 dígitos)" [(ngModel)]="dniCliente" name="dniCliente"
+                maxlength="8" pattern="[0-9]*" inputmode="numeric" (input)="checkDni()" />
+            <span *ngIf="dniYaRegistrado" class="dni-error">DNI ya utilizado</span>
+            <span *ngIf="dniCliente && dniClienteInvalido" class="dni-error">DNI inválido</span>
+        </div>
+        <label for="distrito">Distrito</label>
+        <div class="input-group">
+            <input id="distrito" type="text" placeholder="Distrito" [(ngModel)]="distrito" name="distrito" />
+        </div>
+        <label for="provincia">Provincia</label>
+        <div class="input-group">
+            <input id="provincia" type="text" placeholder="Provincia" [(ngModel)]="provincia" name="provincia" />
+        </div>
+        <label for="departamento">Departamento</label>
+        <div class="input-group">
+            <input id="departamento" type="text" placeholder="Departamento" [(ngModel)]="departamento"
+                name="departamento" />
+        </div>
+        <label for="password">Contraseña</label>
+        <div class="input-group">
+            <input id="password" type="password" placeholder="Crea una contraseña" [(ngModel)]="password"
+                name="password" />
+            <span class="icon eye">👁️</span>
+        </div>
+        <label for="confirm">Confirmar contraseña</label>
+        <div class="input-group">
+            <input id="confirm" type="password" placeholder="Confirma tu contraseña" [(ngModel)]="confirm"
+                name="confirm" />
+            <span class="icon eye">🙈</span>
+        </div>
+        <div *ngIf="errorMsg" class="register-error">{{ errorMsg }}</div>
+        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <button type="submit" class="register-btn">Crear cuenta Cliente</button>
+    </form>
+    <form class="register-form" *ngIf="userType === 'promotor'" (ngSubmit)="onRegister($event)">
+        <label for="email">Correo electrónico</label>
+        <div class="input-group">
+            <input id="email" type="email" placeholder="tu@email.com" [(ngModel)]="email" name="email" />
+        </div>
+        <label for="empresa">Empresa</label>
+        <div class="input-group">
+            <input id="empresa" type="text" placeholder="Nombre de la empresa" [(ngModel)]="empresa" name="empresa" />
+        </div>
+        <label for="direccion">Dirección de local</label>
+        <div class="input-group">
+            <input id="direccion" type="text" placeholder="Dirección del local" [(ngModel)]="direccion"
+                name="direccion" />
+        </div>
+        <label for="ruc">RUC</label>
+        <div class="input-group ruc-group">
+            <input id="ruc" type="text" placeholder="RUC (11 dígitos)" [(ngModel)]="rucPromotor" name="rucPromotor"
+                maxlength="11" (input)="checkRucPromotor()" />
+            <span *ngIf="rucPromotorInvalido" class="ruc-error">RUC inválido</span>
+        </div>
+        <label for="password">Contraseña</label>
+        <div class="input-group">
+            <input id="password" type="password" placeholder="Crea una contraseña" [(ngModel)]="password"
+                name="password" />
+            <span class="icon eye">👁️</span>
+        </div>
+        <label for="confirm">Confirmar contraseña</label>
+        <div class="input-group">
+            <input id="confirm" type="password" placeholder="Confirma tu contraseña" [(ngModel)]="confirm"
+                name="confirm" />
+            <span class="icon eye">🙈</span>
+        </div>
+        <div *ngIf="errorMsg" class="register-error">{{ errorMsg }}</div>
+        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <button type="submit" class="register-btn">Crear cuenta Promotor</button>
+    </form>
+    <div class="register-terms">
+        Al crear una cuenta, aceptas nuestros <a href="#" class="terms-link">Términos y Condiciones</a> y <a href="#"
+            class="terms-link">Política de Privacidad</a>.
+    </div>
+    <div class="register-login">
+        ¿Ya tienes una cuenta? <a href="#" (click)="goToLogin($event)" class="login-link">Inicia sesión</a>
+    </div>
+</div>

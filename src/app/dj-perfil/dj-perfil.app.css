@@ -1,0 +1,369 @@
+/* Menú horizontal de botones en el perfil DJ */
+.dj-perfil-menu {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+/* Botones modernos con icono visible y texto que aparece al hover */
+.modern-back-btn {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: all 0.3s ease;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.modern-back-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: auto;
+    padding: 0.8rem 1.2rem;
+}
+
+.menu-icon {
+    font-size: 1.3rem;
+}
+
+.menu-text {
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: 0;
+    overflow: hidden;
+    margin-left: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modern-back-btn:hover .menu-text {
+    max-width: 200px;
+    margin-left: 0.5rem;
+    opacity: 1;
+}
+
+/* Fila para campos editables con icono alineado a la derecha */
+.editable-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+/* Fila de nombre y apellido alineados con el formulario */
+.profile-names-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.profile-name-field {
+    flex: 1;
+}
+
+.profile-name-field label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.98rem;
+    font-weight: 500;
+    gap: 0.3rem;
+}
+
+.profile-name-field input[readonly] {
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    padding: 0.7rem 1rem 0.7rem 0;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.1rem;
+    width: 100%;
+    box-shadow: none;
+}
+
+/* Fondo degradado igual que home DJ */
+.homedj-background {
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: linear-gradient(120deg, #131228 1%, #00c6fb 90%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Contenedor principal */
+.dj-profile-container {
+    max-width: 370px;
+    margin: 2rem auto;
+    background: #18192b;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+    padding: 1.2rem 1.2rem 2rem 1.2rem;
+    color: #fff;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #b3aefc;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.profile-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.profile-view-link {
+    color: #b3aefc;
+    font-size: 0.98rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profile-banner {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    background: #23243a;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.profile-avatar-wrapper {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem auto 2.5rem auto;
+    z-index: 2;
+}
+
+.profile-avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    object-fit: cover;
+    background: #b3aefc;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.avatar-edit-btn {
+    margin-top: -18px;
+    background: #007aff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+.banner-edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #23243a;
+    color: #b3aefc;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 2.2rem;
+}
+
+.profile-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.98rem;
+    font-weight: 500;
+    gap: 0.3rem;
+}
+
+.profile-form input,
+.profile-form textarea {
+    background: #23243a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.1rem;
+    resize: none;
+}
+
+.profile-form textarea {
+    min-height: 70px;
+    max-height: 160px;
+}
+
+.profile-section-label {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0.7rem 0 0.3rem 0;
+    color: #b3aefc;
+}
+
+.media-grid {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.media-item {
+    width: 64px;
+    height: 64px;
+    background: #292a3d;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b3aefc;
+    font-size: 2rem;
+    border: 2px dashed #b3aefc;
+    cursor: pointer;
+}
+
+.media-item.empty {
+    background: #23243a;
+    border: 2px dashed #292a3d;
+    color: #444;
+    cursor: default;
+}
+
+.media-item.add-media {
+    flex-direction: column;
+    border: 2px dashed #b3aefc;
+    color: #b3aefc;
+    background: #23243a;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.add-media-icon {
+    font-size: 1.5rem;
+}
+
+/* Chips de géneros musicales más visibles */
+.genre-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+    align-items: flex-start;
+}
+
+.chip {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 0.45rem 1.2rem 0.45rem 1rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    letter-spacing: 0.5px;
+}
+
+.chip-close {
+    margin-left: 0.3rem;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.genre-input {
+    background: #23243a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.98rem;
+    min-width: 90px;
+}
+
+.save-profile-btn {
+    margin-top: 1.5rem;
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.save-profile-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}

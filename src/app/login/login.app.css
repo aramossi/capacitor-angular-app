@@ -1,0 +1,201 @@
+/* Modal de error para login */
+.register-error-modal {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.register-error-modal .modal-content {
+    background: #e53935;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-weight: bold;
+    min-width: 220px;
+    position: relative;
+}
+
+.register-error-modal .close-btn {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.logo-img img {
+    width: 120px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    animation: logoFadeIn 1.2s cubic-bezier(.42, 0, .58, 1) 0.2s both;
+}
+
+@keyframes logoFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.logo-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.logo-img img {
+    width: 120px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.logo-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+.register-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.register-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.login-container {
+    background: linear-gradient(120deg, #131228 1%, #00c6fb 90%);
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.login-title {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.login-form {
+    width: 90%;
+    max-width: 350px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #181730;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-group .icon {
+    color: #b3aefc;
+    margin-right: 0.5rem;
+}
+
+.input-group input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    flex: 1;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-group .eye {
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.forgot {
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.forgot a {
+    color: #b3aefc;
+    font-size: 0.95rem;
+    text-decoration: underline;
+}
+
+.login-btn {
+    background: #007aff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+}
+
+.login-btn:hover {
+    background: #005bb5;
+}
+
+.register {
+    margin-top: 2rem;
+    color: #b3aefc;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.register a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+}

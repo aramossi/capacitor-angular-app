@@ -1,0 +1,138 @@
+<div class="homedj-background">
+    <!-- Menú de botones modernos compactos -->
+    <nav class="top-bar-menu">
+        <div class="dj-perfil-menu">
+            <button class="modern-back-btn" (click)="irHome()" title="Principal">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Principal</span>
+            </button>
+            <button class="modern-back-btn" (click)="irPerfil()" title="Mi perfil">
+                <span class="menu-icon">👤</span>
+                <span class="menu-text">Mi perfil</span>
+            </button>
+            <button class="modern-back-btn" (click)="cerrarSesion()" title="Cerrar sesión">
+                <span class="menu-icon">⏻</span>
+                <span class="menu-text">Cerrar sesión</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Icono de carga mientras se obtienen los datos -->
+    <div *ngIf="cargando" style="text-align:center; margin:2rem;">
+        <span style="font-size:2.5rem;">⏳</span>
+        <div>Cargando datos...</div>
+    </div>
+
+    <!-- Layout principal solo si ya cargó -->
+    <div *ngIf="!cargando" class="dj-layout">
+        <div class="dj-main-content">
+            <div class="calendar-container">
+                <!-- Encabezado con título -->
+                <header class="calendar-header">
+                    <h2>Mi Calendario</h2>
+                </header>
+                <!-- Sección del calendario: muestra el mes, días y permite seleccionar disponibilidad -->
+                <div class="calendar-section">
+                    <!-- Mockup visual del calendario (puedes reemplazar por un componente real) -->
+                    <div class="calendar-mockup">
+                        <!-- Encabezado del mes con flechas para navegar -->
+                        <div class="calendar-month">
+                            <button class="month-arrow" (click)="cambiarMes(-1)">&#8592;</button>
+                            {{ meses[mes] }} {{ anio }}
+                            <button class="month-arrow" (click)="cambiarMes(1)">&#8594;</button>
+                        </div>
+                        <!-- Grid de días de la semana y días del mes -->
+                        <div class="calendar-grid">
+                            <!-- Etiquetas de los días de la semana -->
+                            <div class="calendar-day-label" *ngFor="let d of diasSemana">{{d}}</div>
+                            <!-- Días del mes generados dinámicamente -->
+                            <ng-container *ngFor="let day of diasMes">
+                                <div [ngClass]="getDayClass(day)" class="calendar-day" (click)="pintarDia(day)">
+                                    <ng-container *ngIf="day">{{day.num}}</ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- Leyenda para seleccionar el estado del día -->
+                    <div class="calendar-legend">
+                        <span class="legend available" [class.selected]="estadoSeleccionado==='available'"
+                            (click)="seleccionarEstado('available')">Disponible</span>
+                        <span class="legend busy" [class.selected]="estadoSeleccionado==='busy'"
+                            (click)="seleccionarEstado('busy')">Ocupado</span>
+                        <span class="legend tentative" [class.selected]="estadoSeleccionado==='tentative'"
+                            (click)="seleccionarEstado('tentative')">Propuesta</span>
+                    </div>
+                </div>
+                <!-- Sección de gestión de paquetes de servicio del DJ -->
+                <section class="service-section">
+                    <!-- Encabezado con título y botón para agregar un nuevo paquete -->
+                    <div class="service-header">
+                        <h3>Mis Paquetes de Servicio</h3>
+                        <button class="add-service-btn" (click)="agregarPaquete()">+</button>
+                    </div>
+                    <!-- Lista de paquetes de servicio -->
+                    <div class="service-list">
+                        <!-- Cada tarjeta representa un paquete de servicio -->
+                        <div class="service-card" *ngFor="let paquete of paquetes; let i = index">
+                            <!-- Icono del paquete -->
+                            <span class="service-icon">{{paquete.icon}}</span>
+                            <!-- Información editable del paquete -->
+                            <div class="service-info">
+                                <div class="service-title">
+                                    <!-- Si está en modo edición, muestra input; si no, solo el texto -->
+                                    <ng-container *ngIf="editando === i; else noedit">
+                                        <input [(ngModel)]="paquete.titulo" class="edit-input"
+                                            placeholder="Título del paquete" title="Título del paquete" />
+                                    </ng-container>
+                                    <ng-template #noedit>{{paquete.titulo}}</ng-template>
+                                </div>
+                                <div class="service-price">
+                                    <!-- Si está en modo edición, muestra input; si no, solo el texto -->
+                                    <ng-container *ngIf="editando === i; else noeditp">
+                                        <input [(ngModel)]="paquete.precio" class="edit-input" placeholder="Precio"
+                                            title="Precio" />
+                                    </ng-container>
+                                    <ng-template #noeditp>{{paquete.precio}}</ng-template>
+                                </div>
+                            </div>
+                            <!-- Acciones: editar, eliminar, guardar -->
+                            <div class="service-actions">
+                                <span class="edit-icon" (click)="editarPaquete(i)">✏️</span>
+                                <button class="delete-btn" (click)="eliminarPaquete(i)">🗑️</button>
+                                <button *ngIf="editando === i" class="save-btn"
+                                    (click)="guardarPaquete()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Sección de notificaciones de contacto -->
+                <section class="notifications-section">
+                    <div class="service-header">
+                        <h3>📬 Notificaciones de Contacto</h3>
+                    </div>
+                    <div class="notifications-list">
+                        <div *ngIf="notificaciones.length === 0" class="no-notifications">
+                            <p>No tienes notificaciones nuevas</p>
+                        </div>
+                        <div *ngFor="let notif of notificaciones; let i = index" class="notification-card">
+                            <div class="notification-header">
+                                <span class="notification-icon">👤</span>
+                                <div class="notification-info">
+                                    <strong>{{notif.nombreCliente}}</strong>
+                                    <span class="notification-date">{{notif.fecha}}</span>
+                                </div>
+                            </div>
+                            <p class="notification-message">{{notif.mensaje}}</p>
+                            <div class="notification-contact">
+                                <span class="contact-label">📱 Teléfono:</span>
+                                <a [href]="'tel:' + notif.telefono" class="contact-phone">{{notif.telefono}}</a>
+                            </div>
+                            <button class="notification-delete-btn" (click)="eliminarNotificacion(i)"
+                                title="Marcar como leída">✓</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
