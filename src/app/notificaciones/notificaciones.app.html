@@ -1,0 +1,62 @@
+<div class="notificaciones-background">
+    <!-- Menú de botones modernos compactos -->
+    <nav class="top-bar-menu">
+        <div class="dj-perfil-menu">
+            <button class="modern-back-btn" (click)="irHome()" title="Principal">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Principal</span>
+            </button>
+            <button class="modern-back-btn" (click)="irPerfil()" title="Mi perfil">
+                <span class="menu-icon">👤</span>
+                <span class="menu-text">Mi perfil</span>
+            </button>
+            <button class="modern-back-btn active" title="Notificaciones">
+                <span class="menu-icon">🔔</span>
+                <span class="menu-text">Notificaciones</span>
+            </button>
+            <button class="modern-back-btn" (click)="cerrarSesion()" title="Cerrar sesión">
+                <span class="menu-icon">⏻</span>
+                <span class="menu-text">Cerrar sesión</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Icono de carga -->
+    <div *ngIf="cargando" class="loading-container">
+        <span class="loading-icon">⏳</span>
+        <div>Cargando notificaciones...</div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div *ngIf="!cargando" class="notificaciones-container">
+        <header class="notificaciones-header">
+            <h2>Mis Notificaciones</h2>
+        </header>
+
+        <section class="notifications-section">
+            <div *ngIf="notificaciones.length === 0" class="no-notifications">
+                <p>No tienes notificaciones pendientes</p>
+            </div>
+
+            <div class="notifications-list">
+                <div class="notification-card" *ngFor="let notif of notificaciones; let i = index">
+                    <div class="notification-header">
+                        <span class="notification-icon">📅</span>
+                        <div class="notification-info">
+                            <strong>{{notif.nombreCliente}}</strong>
+                            <span class="notification-date">{{notif.id}}</span>
+                        </div>
+                    </div>
+                    <div class="notification-message">{{notif.mensaje}}</div>
+                    <div class="notification-contact">
+                        <span class="contact-label">Teléfono:</span>
+                        <a [href]="'tel:' + notif.telefono" class="contact-phone">{{notif.telefono}}</a>
+                    </div>
+                    <button class="notification-delete-btn" (click)="eliminarNotificacion(i)" title="Marcar como leído">
+                        ✓
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

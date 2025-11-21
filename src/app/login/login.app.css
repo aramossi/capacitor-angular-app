@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 /* Modal de error para login */
 .register-error-modal {
     position: fixed;
@@ -72,8 +74,6 @@
     align-items: center;
     margin-bottom: 1rem;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 .register-btn {
     display: inline-block;

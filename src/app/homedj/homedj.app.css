@@ -78,8 +78,6 @@
 }
 
 /* Overlay para fondo del menú hamburguesa en móvil */
-padding: 0;
-}
 
 /* Wrapper oculto para el botón de agregar servicio */
 .add-service-btn-wrapper {
@@ -103,7 +101,55 @@ padding: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
+}
+
+/* Inputs editables en la información del servicio */
+.service-info .edit-input,
+.service-info input,
+.service-info textarea {
+    background: #1a1b2e;
+    border: 1px solid #3a3b4f;
+    border-radius: 6px;
+    padding: 0.6rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: 'Poppins', Arial, sans-serif;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.service-info textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.service-info .edit-input:focus,
+.service-info input:focus,
+.service-info textarea:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.service-info .edit-input::placeholder,
+.service-info input::placeholder,
+.service-info textarea::placeholder {
+    color: rgba(179, 174, 252, 0.5);
+}
+
+/* Descripción del servicio */
+.service-description {
+    margin-top: 0.3rem;
+}
+
+.description-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.4;
+    display: block;
 }
 
 /* Acciones de cada servicio (editar, eliminar) */
@@ -339,6 +385,90 @@ padding: 0;
 .legend.selected {
     outline: 2px solid #fff;
     box-shadow: 0 0 0 2px #b3aefc;
+}
+
+/* Formulario de agenda para días ocupados */
+.agenda-form {
+    background: #292a3d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007aff;
+}
+
+.agenda-form h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.agenda-form input,
+.agenda-form textarea {
+    width: 100%;
+    background: #1a1b2e;
+    border: 1px solid #3a3b4f;
+    border-radius: 8px;
+    padding: 0.8rem;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.agenda-form input:focus,
+.agenda-form textarea:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.agenda-form input::placeholder,
+.agenda-form textarea::placeholder {
+    color: rgba(179, 174, 252, 0.5);
+}
+
+.agenda-form-buttons {
+    display: flex;
+    gap: 2%;
+    margin-top: 0.5rem;
+}
+
+.agenda-form button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.agenda-form button:first-child {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+}
+
+.agenda-form button:first-child:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #9896e0 100%);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.agenda-form button:last-child {
+    background: #e53935;
+    color: #fff;
+}
+
+.agenda-form button:last-child:hover {
+    background: #c62828;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+    transform: translateY(-2px);
 }
 
 /* Sección de servicios del DJ */

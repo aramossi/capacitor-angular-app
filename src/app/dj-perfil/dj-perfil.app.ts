@@ -69,6 +69,10 @@ export class DjPerfilComponent implements OnInit {
         this.router.navigate(['/perfil']);
     }
 
+    irNotificaciones() {
+        this.router.navigate(['/notificaciones']);
+    }
+
     cerrarSesion() {
         this.router.navigate(['/']);
     }

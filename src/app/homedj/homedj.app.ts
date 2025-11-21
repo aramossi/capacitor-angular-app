@@ -32,6 +32,16 @@ export class HomeDjPageApp {
     // Notificaciones de contacto de clientes
     notificaciones: Notificacion[] = [];
 
+    // Agenda para días ocupados y propuestas
+    agendaFormVisible: boolean = false;
+    agendaFecha: string = '';
+    agendaDireccion: string = '';
+    agendaPersona: string = '';
+    agendaTelefono: string = '';
+    agendaDescripcion: string = '';
+    agendaTipoFormulario: 'busy' | 'tentative' | null = null;
+    agendasGuardadas: { [key: string]: any } = {};
+
     private router = inject(Router);
     private firestore = inject(Firestore);
     private auth = inject(Auth);
@@ -76,6 +86,14 @@ export class HomeDjPageApp {
         } else {
             this.notificaciones = [];
         }
+        // Agendas guardadas
+        const agendasDoc = doc(this.firestore, 'agendas', this.userId);
+        const agendasSnap = await getDoc(agendasDoc);
+        if (agendasSnap.exists()) {
+            this.agendasGuardadas = agendasSnap.data()["agendas"] || {};
+        } else {
+            this.agendasGuardadas = {};
+        }
         this.cargando = false;
     }
 
@@ -93,6 +111,11 @@ export class HomeDjPageApp {
     irPerfil() {
         this.menuAbierto = false;
         this.router.navigate(['/perfil']);
+    }
+
+    irNotificaciones() {
+        this.menuAbierto = false;
+        this.router.navigate(['/notificaciones']);
     }
 
     generarDiasMes() {
@@ -148,8 +171,23 @@ export class HomeDjPageApp {
     async pintarDia(day: CalendarDay | null) {
         if (!day) return;
         const key = day.key;
+
+        // Si el día ya tiene un estado y se hace clic en él, mostrar la información guardada
+        if (this.estadosDias[key] && this.agendasGuardadas[key]) {
+            this.agendaFecha = key;
+            const agenda = this.agendasGuardadas[key];
+            this.agendaPersona = agenda.persona || '';
+            this.agendaTelefono = agenda.telefono || '';
+            this.agendaDireccion = agenda.direccion || '';
+            this.agendaDescripcion = agenda.descripcion || '';
+            this.agendaTipoFormulario = this.estadosDias[key] as 'busy' | 'tentative';
+            this.agendaFormVisible = true;
+            return;
+        }
+
         if (this.estadosDias[key] === this.estadoSeleccionado) {
             this.estadosDias[key] = undefined;
+            delete this.agendasGuardadas[key];
         } else {
             this.estadosDias[key] = this.estadoSeleccionado;
         }
@@ -158,6 +196,50 @@ export class HomeDjPageApp {
             const calDoc = doc(this.firestore, 'calendarios', this.userId);
             await setDoc(calDoc, { estadosDias: this.estadosDias });
         }
+
+        // Si el estado es ocupado o tentativo, mostrar formulario de agenda
+        if (this.estadoSeleccionado === 'busy' || this.estadoSeleccionado === 'tentative') {
+            this.agendaFormVisible = true;
+            this.agendaFecha = key;
+            this.agendaTipoFormulario = this.estadoSeleccionado;
+            // Limpiar campos para nueva entrada
+            this.agendaPersona = '';
+            this.agendaTelefono = '';
+            this.agendaDireccion = '';
+            this.agendaDescripcion = '';
+        }
+    }
+
+    async guardarAgenda() {
+        const agendaInfo: any = {
+            fecha: this.agendaFecha,
+            persona: this.agendaPersona,
+            telefono: this.agendaTelefono,
+            descripcion: this.agendaDescripcion
+        };
+
+        // Solo agregar dirección si es tipo 'busy'
+        if (this.agendaTipoFormulario === 'busy') {
+            agendaInfo.direccion = this.agendaDireccion;
+        }
+
+        // Guardar en agendasGuardadas
+        this.agendasGuardadas[this.agendaFecha] = agendaInfo;
+
+        // Guardar en Firestore
+        if (this.userId) {
+            const agendasDoc = doc(this.firestore, 'agendas', this.userId);
+            await setDoc(agendasDoc, { agendas: this.agendasGuardadas });
+        }
+
+        // Limpiar y ocultar formulario
+        this.agendaFormVisible = false;
+        this.agendaFecha = '';
+        this.agendaDireccion = '';
+        this.agendaPersona = '';
+        this.agendaTelefono = '';
+        this.agendaDescripcion = '';
+        this.agendaTipoFormulario = null;
     }
 
     async agregarPaquete() {
@@ -186,14 +268,8 @@ export class HomeDjPageApp {
         }
     }
 
-    /**
-     * Elimina una notificación de la lista (marcar como leída)
-     * @param index - Índice de la notificación a eliminar
-     */
     async eliminarNotificacion(index: number) {
-        // Eliminar la notificación del array
         this.notificaciones.splice(index, 1);
-        // Guardar en Firestore
         if (this.userId) {
             const notifDoc = doc(this.firestore, 'notificaciones', this.userId);
             await setDoc(notifDoc, { notificaciones: this.notificaciones });

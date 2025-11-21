@@ -10,6 +10,10 @@
                 <span class="menu-icon">👤</span>
                 <span class="menu-text">Mi perfil</span>
             </button>
+            <button class="modern-back-btn" (click)="irNotificaciones()" title="Notificaciones">
+                <span class="menu-icon">🔔</span>
+                <span class="menu-text">Notificaciones</span>
+            </button>
             <button class="modern-back-btn" (click)="cerrarSesion()" title="Cerrar sesión">
                 <span class="menu-icon">⏻</span>
                 <span class="menu-text">Cerrar sesión</span>
@@ -62,6 +66,21 @@
                         <span class="legend tentative" [class.selected]="estadoSeleccionado==='tentative'"
                             (click)="seleccionarEstado('tentative')">Propuesta</span>
                     </div>
+                    <!-- Formulario de agenda para días ocupados y propuestas -->
+                    <div *ngIf="agendaFormVisible" class="agenda-form">
+                        <h4>{{agendaTipoFormulario === 'busy' ? 'Registrar agenda para' : 'Registrar propuesta para'}}
+                            {{agendaFecha}}</h4>
+                        <input *ngIf="agendaTipoFormulario === 'busy'" [(ngModel)]="agendaDireccion"
+                            placeholder="Dirección" class="edit-input" />
+                        <input [(ngModel)]="agendaPersona" placeholder="Persona a contactar" class="edit-input" />
+                        <input [(ngModel)]="agendaTelefono" placeholder="Teléfono" class="edit-input" />
+                        <textarea [(ngModel)]="agendaDescripcion" placeholder="Descripción breve" class="edit-input"
+                            rows="3"></textarea>
+                        <div class="agenda-form-buttons">
+                            <button (click)="guardarAgenda()">Guardar</button>
+                            <button (click)="agendaFormVisible=false">Cancelar</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- Sección de gestión de paquetes de servicio del DJ -->
                 <section class="service-section">
@@ -94,6 +113,17 @@
                                     </ng-container>
                                     <ng-template #noeditp>{{paquete.precio}}</ng-template>
                                 </div>
+                                <div class="service-description">
+                                    <!-- Si está en modo edición, muestra textarea; si no, solo el texto -->
+                                    <ng-container *ngIf="editando === i; else noeditd">
+                                        <textarea [(ngModel)]="paquete.descripcion" class="edit-input"
+                                            placeholder="Descripción del paquete"></textarea>
+                                    </ng-container>
+                                    <ng-template #noeditd>
+                                        <span class="description-text">{{paquete.descripcion || 'Sin
+                                            descripción'}}</span>
+                                    </ng-template>
+                                </div>
                             </div>
                             <!-- Acciones: editar, eliminar, guardar -->
                             <div class="service-actions">
@@ -102,33 +132,6 @@
                                 <button *ngIf="editando === i" class="save-btn"
                                     (click)="guardarPaquete()">Guardar</button>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Sección de notificaciones de contacto -->
-                <section class="notifications-section">
-                    <div class="service-header">
-                        <h3>📬 Notificaciones de Contacto</h3>
-                    </div>
-                    <div class="notifications-list">
-                        <div *ngIf="notificaciones.length === 0" class="no-notifications">
-                            <p>No tienes notificaciones nuevas</p>
-                        </div>
-                        <div *ngFor="let notif of notificaciones; let i = index" class="notification-card">
-                            <div class="notification-header">
-                                <span class="notification-icon">👤</span>
-                                <div class="notification-info">
-                                    <strong>{{notif.nombreCliente}}</strong>
-                                    <span class="notification-date">{{notif.fecha}}</span>
-                                </div>
-                            </div>
-                            <p class="notification-message">{{notif.mensaje}}</p>
-                            <div class="notification-contact">
-                                <span class="contact-label">📱 Teléfono:</span>
-                                <a [href]="'tel:' + notif.telefono" class="contact-phone">{{notif.telefono}}</a>
-                            </div>
-                            <button class="notification-delete-btn" (click)="eliminarNotificacion(i)"
-                                title="Marcar como leída">✓</button>
                         </div>
                     </div>
                 </section>

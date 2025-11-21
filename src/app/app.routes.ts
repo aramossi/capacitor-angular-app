@@ -10,6 +10,7 @@ import { HomeDjPageApp } from './homedj/homedj.app';
 import { DjPerfilComponent } from './dj-perfil/dj-perfil.app';
 import { HomePromotorPageApp } from './homepromotor/homepromotor.app';
 import { HomeClientePageApp } from './homecliente/homecliente.app';
+import { NotificacionesPageApp } from './notificaciones/notificaciones.app';
 
 export const routes: Routes = [
     {
@@ -39,5 +40,9 @@ export const routes: Routes = [
     {
         path: 'perfil', // Perfil de DJ
         component: DjPerfilComponent,
+    },
+    {
+        path: 'notificaciones', // Notificaciones
+        component: NotificacionesPageApp,
     },
 ];
