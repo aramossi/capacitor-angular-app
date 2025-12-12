@@ -1,8 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Capacitor } from '@capacitor/core';
+
+import { Solicitud, Evento, AgendaGuardada } from '../models/user.model';
 
 interface Notificacion {
     id?: string;
@@ -22,9 +25,13 @@ interface Notificacion {
 })
 export class NotificacionesPageApp implements OnInit {
     notificaciones: Notificacion[] = [];
-    agendasGuardadas: { [key: string]: any } = {};
+    solicitudes: Solicitud[] = [];
+    eventos: Evento[] = [];
+    vistaActual: 'solicitudes' | 'eventos' = 'solicitudes';
+    agendasGuardadas: { [key: string]: AgendaGuardada } = {};
     cargando: boolean = true;
     userId: string = '';
+    isNativePlatform: boolean = Capacitor.isNativePlatform();
 
     private router = inject(Router);
     private firestore = inject(Firestore);
@@ -42,28 +49,49 @@ export class NotificacionesPageApp implements OnInit {
     async cargarNotificaciones() {
         this.cargando = true;
 
-        // Cargar agendas guardadas
+        // Cargar solicitudes de clientes
+        await this.cargarSolicitudes();
+
+        // Cargar eventos del calendario (agendas guardadas)
         const agendasDoc = doc(this.firestore, 'agendas', this.userId);
         const agendasSnap = await getDoc(agendasDoc);
         if (agendasSnap.exists()) {
             this.agendasGuardadas = agendasSnap.data()["agendas"] || {};
         }
 
-        // Convertir agendas a notificaciones
-        this.notificaciones = Object.entries(this.agendasGuardadas).map(([fecha, agenda]: [string, any]) => ({
+        // Convertir agendas a eventos
+        this.eventos = Object.entries(this.agendasGuardadas).map(([fecha, agenda]: [string, any]) => ({
             id: fecha,
-            nombreCliente: agenda.persona,
+            fecha: fecha,
+            persona: agenda.persona,
             telefono: agenda.telefono,
-            mensaje: `Fecha: ${fecha}${agenda.direccion ? '\nDirección: ' + agenda.direccion : ''}${agenda.descripcion ? '\nDescripción: ' + agenda.descripcion : ''}`
+            direccion: agenda.direccion || '',
+            descripcion: agenda.descripcion || ''
         }));
 
         this.cargando = false;
     }
 
-    async eliminarNotificacion(index: number) {
-        const notif = this.notificaciones[index];
-        if (notif.id) {
-            delete this.agendasGuardadas[notif.id];
+    async cargarSolicitudes() {
+        try {
+            const solicitudesRef = collection(this.firestore, 'solicitudes');
+            const q = query(solicitudesRef, where('djId', '==', this.userId));
+            const querySnapshot = await getDocs(q);
+
+            this.solicitudes = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+        } catch (error) {
+            console.error('Error al cargar solicitudes:', error);
+            this.solicitudes = [];
+        }
+    }
+
+    async eliminarEvento(index: number) {
+        const evento = this.eventos[index];
+        if (evento.id) {
+            delete this.agendasGuardadas[evento.id];
 
             // Guardar en Firestore
             if (this.userId) {
@@ -71,8 +99,12 @@ export class NotificacionesPageApp implements OnInit {
                 await setDoc(agendasDoc, { agendas: this.agendasGuardadas });
             }
 
-            this.notificaciones.splice(index, 1);
+            this.eventos.splice(index, 1);
         }
+    }
+
+    cambiarVista(vista: 'solicitudes' | 'eventos') {
+        this.vistaActual = vista;
     }
 
     irHome() {

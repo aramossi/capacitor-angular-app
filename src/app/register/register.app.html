@@ -58,7 +58,13 @@
                 {{ errorMsg }}
             </div>
         </div>
-        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <div *ngIf="successMsg" class="register-success-modal">
+            <div class="modal-content success">
+                <span class="close-btn" (click)="successMsg = ''">&times;</span>
+                <span class="success-icon">✅</span>
+                {{ successMsg }}
+            </div>
+        </div>
         <button type="submit" class="register-btn">Registrar DJ AHORA</button>
     </form>
     <form class="register-form" *ngIf="userType === 'cliente'" (ngSubmit)="onRegister($event)">
@@ -107,7 +113,13 @@
             <span class="icon eye">🙈</span>
         </div>
         <div *ngIf="errorMsg" class="register-error">{{ errorMsg }}</div>
-        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <div *ngIf="successMsg" class="register-success-modal">
+            <div class="modal-content success">
+                <span class="close-btn" (click)="successMsg = ''">&times;</span>
+                <span class="success-icon">✅</span>
+                {{ successMsg }}
+            </div>
+        </div>
         <button type="submit" class="register-btn">Crear cuenta Cliente</button>
     </form>
     <form class="register-form" *ngIf="userType === 'promotor'" (ngSubmit)="onRegister($event)">
@@ -143,7 +155,13 @@
             <span class="icon eye">🙈</span>
         </div>
         <div *ngIf="errorMsg" class="register-error">{{ errorMsg }}</div>
-        <div *ngIf="successMsg" class="register-success">{{ successMsg }}</div>
+        <div *ngIf="successMsg" class="register-success-modal">
+            <div class="modal-content success">
+                <span class="close-btn" (click)="successMsg = ''">&times;</span>
+                <span class="success-icon">✅</span>
+                {{ successMsg }}
+            </div>
+        </div>
         <button type="submit" class="register-btn">Crear cuenta Promotor</button>
     </form>
     <div class="register-terms">

@@ -1,4 +1,1005 @@
-.homepromotor-container {
-    padding: 2rem;
+/* Fondo principal del Home Promotor */
+.homepromotor-background {
+    background: linear-gradient(120deg, #131228 1%, #00c6fb 90%);
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    padding-top: 90px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Barra superior de navegación */
+.top-bar-menu {
+    width: 100%;
+    background: #18192b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 14px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menú horizontal de botones */
+.promotor-menu {
+    display: flex;
+    gap: 11.2px;
+    margin: 8px;
+}
+
+/* Botones modernos */
+.modern-back-btn {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 12.8px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: all 0.3s ease;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.modern-back-btn:hover {
+    background: linear-gradient(90deg, #005bb5 60%, #b3aefc 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: auto;
+    padding: 12.8px 19.2px;
+}
+
+.menu-icon {
+    font-size: 20.8px;
+}
+
+.menu-text {
+    font-weight: 600;
+    font-size: 16px;
+    max-width: 0;
+    overflow: hidden;
+    margin-left: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modern-back-btn:hover .menu-text {
+    max-width: 200px;
+    margin-left: 8px;
+    opacity: 1;
+}
+
+/* Contenedor principal */
+.promotor-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 22px;
+}
+
+/* Header del promotor */
+.promotor-header {
+    background: #18192b;
+    padding: 32px 24px;
+    border-radius: 0;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 20px rgba(0, 229, 255, 0.15);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.welcome-section {
+    margin-bottom: 24px;
     text-align: center;
+}
+
+.welcome-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: #fff;
+}
+
+.nombre-promotor {
+    color: #00E5FF;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+.welcome-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 8px 0;
+}
+
+.welcome-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 8px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Filtros */
+.filtros-section {
+    background: rgba(44, 46, 66, 0.6);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 24px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.filtro-grupo {
+    margin-bottom: 16px;
+}
+
+.filtro-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00E5FF;
+}
+
+/* Select de filtro de género */
+.filtro-select {
+    width: 100%;
+    background: rgba(0, 82, 204, 0.2);
+    color: #fff;
+    border: 2px solid rgba(0, 229, 255, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filtro-select:hover {
+    border-color: #00E5FF;
+    background: rgba(0, 82, 204, 0.3);
+}
+
+.filtro-select:focus {
+    border-color: #00E5FF;
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+}
+
+.filtro-select option {
+    background: #1a1b2e;
+    color: #fff;
+    padding: 12px;
+}
+
+/* Input de búsqueda por nombre */
+.filtro-input {
+    width: 100%;
+    background: rgba(0, 82, 204, 0.2);
+    color: #fff;
+    border: 2px solid rgba(0, 229, 255, 0.3);
+    border-radius: 8px;
+    padding: 12px 4px;
+    font-size: 16px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filtro-input::placeholder {
+    color: rgba(0, 229, 255, 0.4);
+    font-style: italic;
+}
+
+.filtro-input:hover {
+    border-color: #00E5FF;
+    background: rgba(0, 82, 204, 0.3);
+}
+
+.filtro-input:focus {
+    border-color: #00E5FF;
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+    background: rgba(0, 82, 204, 0.3);
+}
+
+/* Botón limpiar filtros */
+.btn-limpiar {
+    background: linear-gradient(135deg, #5C6BC0 0%, #00E5FF 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+    margin-top: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-limpiar:hover {
+    background: linear-gradient(135deg, #0052CC 0%, #00E5FF 100%);
+    box-shadow: 0 6px 16px rgba(0, 229, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-limpiar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 229, 255, 0.3);
+}
+
+.header-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+    margin: 24px 0;
+}
+
+.djs-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00E5FF;
+    margin: 0;
+    text-align: center;
+}
+
+.filtro-generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11.2px;
+    justify-content: center;
+}
+
+.genero-filtro {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid transparent;
+    padding: 11.2px 19.2px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.genero-filtro:hover {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: #007aff;
+}
+
+.genero-filtro.active {
+    background: linear-gradient(90deg, #007aff 60%, #b3aefc 100%);
+    border-color: #007aff;
+    color: #fff;
+}
+
+.filtro-disponibilidad {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.disponibilidad-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid transparent;
+    padding: 11.2px 24px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.disponibilidad-btn:hover {
+    background: rgba(46, 204, 64, 0.2);
+    border-color: #2ecc40;
+}
+
+.disponibilidad-btn.active {
+    background: #2ecc40;
+    border-color: #2ecc40;
+    color: #fff;
+}
+
+/* Título de sección */
+.djs-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* Loading */
+.loading-container {
+    text-align: center;
+    padding: 48px 24px;
+    background: rgba(0, 82, 204, 0.1);
+    border-radius: 16px;
+    border: 2px dashed rgba(0, 229, 255, 0.3);
+    margin: 24px;
+}
+
+.loading-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* Grid de DJs */
+.djs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+/* Tarjeta de DJ */
+.dj-card {
+    background: rgba(44, 46, 66, 0.8);
+    border-radius: 16px;
+    border-left: 4px solid #00E5FF;
+    padding: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dj-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+    border-left-color: #5C6BC0;
+}
+
+.dj-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #00E5FF;
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.4);
+}
+
+.dj-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dj-info {
+    text-align: center;
+}
+
+.dj-nombre {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+}
+
+.dj-descripcion {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px 0;
+}
+
+/* Géneros musicales */
+.dj-generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.genero-chip {
+    background: rgba(0, 82, 204, 0.3);
+    color: #00E5FF;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+/* Botones de acción */
+.dj-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.contactar-btn,
+.propuesta-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #00E5FF 0%, #0052CC 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+}
+
+.contactar-btn:hover,
+.propuesta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 229, 255, 0.4);
+}
+
+.contactar-btn.secondary {
+    background: rgba(0, 82, 204, 0.3);
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    color: #00E5FF;
+    box-shadow: none;
+}
+
+.contactar-btn.secondary:hover {
+    background: rgba(0, 82, 204, 0.5);
+    border-color: #00E5FF;
+}
+
+/* Siguiente sección */
+.siguiente-seccion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11.2px;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+/* Géneros duplicados - eliminar */
+/* .genero-chip ya está definido arriba */
+
+/* Estado de disponibilidad */
+.dj-disponibilidad {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.estado-disponible {
+    color: #00E5FF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.estado-ocupado {
+    color: #5C6BC0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Botones de acción duplicados - ya definidos arriba */
+/* .dj-actions ya está definido */
+}
+
+.btn-propuesta,
+/* Botones duplicados - limpiar definiciones antiguas */
+.btn-contactar,
+.contactar-btn {
+    /* Ya definidos arriba en .contactar-btn, .propuesta-btn */
+}
+
+/* Botón Propuesta (principal) */
+.btn-propuesta,
+.contactar-btn:not(.secondary) {
+    /* Ya definidos arriba */
+}
+
+.btn-propuesta:hover,
+.contactar-btn:not(.secondary):hover {
+    /* Ya definidos arriba */
+}
+
+.btn-propuesta:active,
+.contactar-btn:not(.secondary):active {
+    /* Ya definidos arriba */
+}
+
+/* Botón Ver disponibilidad (secundario) */
+.btn-contactar,
+.contactar-btn.secondary {
+    /* Ya definidos arriba */
+}
+
+.btn-contactar:hover,
+.contactar-btn.secondary:hover {
+    /* Ya definidos arriba */
+}
+
+.btn-contactar:active,
+.contactar-btn.secondary:active {
+    /* Ya definidos arriba */
+}
+
+/* Iconos en los botones */
+.contactar-btn span {
+    font-size: 18px;
+}
+
+/* Mensaje sin resultados */
+.no-djs {
+    text-align: center;
+    padding: 48px 24px;
+    background: rgba(0, 82, 204, 0.1);
+    border-radius: 16px;
+    border: 2px dashed rgba(0, 229, 255, 0.3);
+    grid-column: 1 / -1;
+}
+
+.no-djs p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+}
+
+/* Modal del calendario */
+.calendario-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 17, 34, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 16px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.calendario-contenido {
+    background: linear-gradient(135deg, #1a1b2e 0%, #0d0e1a 100%);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 550px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 229, 255, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 82, 204, 0.2);
+    color: #00E5FF;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.cerrar-modal:hover {
+    background: rgba(0, 82, 204, 0.4);
+    border-color: #00E5FF;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+}
+
+.modal-header h2 {
+    color: #00E5FF;
+    margin: 0 0 10px 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.modal-header p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-size: 15px;
+}
+
+/* Calendario */
+.calendar-wrapper {
+    margin-bottom: 24px;
+}
+
+.calendar-month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    padding: 0 10px;
+}
+
+.month-arrow {
+    background: rgba(0, 82, 204, 0.2);
+    color: #00E5FF;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.month-arrow:hover {
+    background: rgba(0, 82, 204, 0.4);
+    border-color: #00E5FF;
+    transform: scale(1.1);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.calendar-day-label {
+    text-align: center;
+    font-weight: 700;
+    color: #00E5FF;
+    padding: 10px 0;
+    font-size: 13px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(0, 82, 204, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.calendar-day.available {
+    background: rgba(0, 229, 255, 0.2);
+    color: #00E5FF;
+    border-color: rgba(0, 229, 255, 0.4);
+}
+
+.calendar-day.available:hover {
+    background: rgba(0, 229, 255, 0.3);
+    border-color: #00E5FF;
+    transform: scale(1.05);
+}
+
+.calendar-day.busy {
+    background: rgba(0, 82, 204, 0.3);
+    color: #0052CC;
+    border-color: rgba(0, 82, 204, 0.5);
+}
+
+.calendar-day.busy:hover {
+    background: rgba(0, 82, 204, 0.4);
+    border-color: #0052CC;
+}
+
+.calendar-day.tentative {
+    background: rgba(92, 107, 192, 0.2);
+    color: #5C6BC0;
+    border-color: rgba(92, 107, 192, 0.4);
+}
+
+.calendar-day.tentative:hover {
+    background: rgba(92, 107, 192, 0.3);
+    border-color: #5C6BC0;
+}
+
+.calendar-day.today {
+    border: 2px solid #fff;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Leyenda del calendario */
+.calendar-legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    flex-wrap: wrap;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.legend.available {
+    background: rgba(0, 229, 255, 0.2);
+    color: #00E5FF;
+    border-color: rgba(0, 229, 255, 0.4);
+}
+
+.legend.busy {
+    background: rgba(0, 82, 204, 0.3);
+    color: #0052CC;
+    border-color: rgba(0, 82, 204, 0.5);
+}
+
+.legend.tentative {
+    background: rgba(92, 107, 192, 0.2);
+    color: #5C6BC0;
+    border-color: rgba(92, 107, 192, 0.4);
+}
+
+/* Botón de contactar en modal */
+.modal-contactar-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #00E5FF 0%, #0052CC 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+}
+
+.modal-contactar-btn:hover {
+    background: linear-gradient(135deg, #0052CC 0%, #5C6BC0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.5);
+}
+
+.modal-contactar-btn span {
+    font-size: 20px;
+}
+
+/* Modal del formulario de propuesta */
+.formulario-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 17, 34, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    padding: 16px;
+    animation: fadeIn 0.3s ease;
+}
+
+.formulario-contenido {
+    background: linear-gradient(135deg, #1a1b2e 0%, #0d0e1a 100%);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 229, 255, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.formulario-contenido.propuesta-amplia {
+    max-width: 700px;
+}
+
+/* Formulario de propuesta */
+.formulario-propuesta {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #00E5FF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.required {
+    color: #5C6BC0;
+}
+
+.form-input,
+.form-textarea {
+    background: rgba(0, 82, 204, 0.2);
+    color: #fff;
+    border: 2px solid rgba(0, 229, 255, 0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-input:hover,
+.form-textarea:hover {
+    border-color: rgba(0, 229, 255, 0.5);
+    background: rgba(0, 82, 204, 0.3);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #00E5FF;
+    background: rgba(0, 82, 204, 0.3);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Mensajes */
+.mensaje-exito {
+    background: rgba(0, 229, 255, 0.2);
+    color: #00E5FF;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    font-size: 14px;
+    text-align: center;
+}
+
+.mensaje-error {
+    background: rgba(0, 82, 204, 0.3);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Acciones del formulario */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-cancelar,
+.btn-enviar {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.btn-cancelar {
+    background: rgba(0, 82, 204, 0.2);
+    color: #00E5FF;
+    border: 2px solid rgba(0, 229, 255, 0.4);
+}
+
+.btn-cancelar:hover {
+    background: rgba(0, 82, 204, 0.3);
+    border-color: #00E5FF;
+    transform: translateY(-2px);
+}
+
+.btn-enviar {
+    background: linear-gradient(135deg, #00E5FF 0%, #0052CC 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 229, 255, 0.3);
+}
+
+.btn-enviar:hover {
+    background: linear-gradient(135deg, #0052CC 0%, #5C6BC0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }

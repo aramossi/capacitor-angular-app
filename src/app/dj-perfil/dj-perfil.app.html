@@ -23,7 +23,7 @@
         </header>
         <div class="profile-avatar-wrapper"
             style="margin: 1.5rem auto 2.5rem auto; display: flex; flex-direction: column; align-items: center;">
-            <img class="profile-avatar" [src]="avatarUrl || 'assets/avatar-dj-default.jpg'" alt="Avatar DJ" />
+            <img class="profile-avatar" [src]="avatarUrl || getDefaultAvatar()" alt="Avatar DJ" />
             <label class="avatar-edit-btn" title="Editar Avatar">
                 <span class="camera-icon">📷</span>
                 <input type="file" accept="image/*" (change)="onAvatarSelected($event)" style="display:none" />

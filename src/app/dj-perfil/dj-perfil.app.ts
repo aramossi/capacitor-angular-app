@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
+import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
-import { doc, updateDoc, setDoc, Firestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-dj-perfil',
@@ -37,15 +38,22 @@ export class DjPerfilComponent implements OnInit {
 
     constructor(private router: Router) { }
 
+    getDefaultAvatar(): string {
+        if (Capacitor.isNativePlatform()) {
+            return Capacitor.convertFileSrc('assets/avatar-dj-default.jpg');
+        }
+        return 'assets/avatar-dj-default.jpg';
+    }
+
     ngOnInit() {
         onAuthStateChanged(this.auth, async (user: User | null) => {
             if (user) {
                 this.userId = user.uid;
-                // Cargar datos del usuario por email (así están guardados en Firestore)
-                const userData = await this.userService.getUserByEmail(user.email || '');
+                this.firestoreDocId = user.uid; // El UID es el ID del documento
+                // Cargar datos del usuario directamente por UID
+                const userData = await this.userService.getUserByUid(user.uid);
                 console.log('Datos cargados desde Firestore:', userData); // Debug
                 if (userData) {
-                    this.firestoreDocId = userData.id || ''; // Guardar el ID del documento
                     this.userNombre = userData.nombre || '';
                     this.userApellido = userData.apellido || '';
                     this.avatarUrl = userData.avatar || '';
@@ -53,9 +61,8 @@ export class DjPerfilComponent implements OnInit {
                     this.descripcion = userData.descripcion || '';
                     this.generos = userData.generos || [];
                     this.rider = userData.rider || '';
+                    console.log('Avatar URL cargado:', this.avatarUrl); // Debug
                     console.log('Nombre artístico cargado:', this.nombreArtistico); // Debug
-                    console.log('Descripción cargada:', this.descripcion); // Debug
-                    console.log('Géneros cargados:', this.generos); // Debug
                 }
             }
         });
@@ -82,19 +89,41 @@ export class DjPerfilComponent implements OnInit {
         this.avatarError = '';
         const target = event.target as HTMLInputElement;
         const file: File = target.files?.[0]!;
-        if (!file || !this.firestoreDocId) return;
+        if (!file || !this.firestoreDocId) {
+            this.avatarError = 'Por favor selecciona una imagen válida.';
+            return;
+        }
+
+        // Validar tamaño (máximo 1MB para Base64)
+        if (file.size > 1048576) {
+            this.avatarError = 'La imagen es muy grande. Máximo 1MB.';
+            return;
+        }
+
         try {
-            const storage = getStorage();
-            const storageRef = ref(storage, `avatars/${this.userId}`);
-            await uploadBytes(storageRef, file);
-            const url = await getDownloadURL(storageRef);
-            this.avatarUrl = url;
-            // Actualizar en Firestore usando el ID del documento correcto
-            const userDoc = doc(this.firestore, 'users', this.firestoreDocId);
-            await setDoc(userDoc, { avatar: url }, { merge: true });
-            this.avatarMessage = '¡Foto de perfil actualizada con éxito!';
+            console.log('Convirtiendo imagen a Base64...', file.name);
+
+            // Convertir imagen a Base64
+            const reader = new FileReader();
+            reader.onload = async (e: ProgressEvent<FileReader>) => {
+                const base64String = e.target?.result as string;
+                this.avatarUrl = base64String;
+
+                // Guardar en Firestore directamente
+                const userDoc = doc(this.firestore, 'users', this.firestoreDocId);
+                await setDoc(userDoc, { avatar: base64String }, { merge: true });
+                console.log('Avatar guardado en Firestore');
+                this.avatarMessage = '¡Foto de perfil actualizada con éxito!';
+            };
+
+            reader.onerror = () => {
+                this.avatarError = 'Error al leer la imagen.';
+            };
+
+            reader.readAsDataURL(file);
         } catch (err) {
-            this.avatarError = 'Error al subir la foto. Intenta nuevamente.';
+            console.error('Error al guardar avatar:', err);
+            this.avatarError = 'Error al guardar la foto. Intenta nuevamente.';
         }
     }
 

@@ -34,13 +34,14 @@ Estructura del proyecto (explicación dinámica):
 // El proyecto es modular y escalable, permitiendo agregar nuevas vistas o servicios fácilmente.
 */
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserData } from '../models/user.model';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 @Component({
     standalone: true,
     styleUrls: ['./register.app.css'],
@@ -82,6 +83,8 @@ export class RegisterPageApp {
     departamento: string = '';
     empresa: string = '';
     direccion: string = '';
+
+    private firestore = inject(Firestore);
 
     constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
@@ -151,7 +154,25 @@ export class RegisterPageApp {
                     };
                 }
                 // Guardar con el UID del usuario autenticado como ID del documento
-                return this.userService.addUserWithUid(cred.user.uid, userData);
+                const uid = cred.user.uid;
+                return this.userService.addUserWithUid(uid, userData).then(async () => {
+                    // Si es DJ, inicializar sus colecciones de calendario y paquetes
+                    if (this.userType === 'dj') {
+                        // Crear documento de calendario vacío
+                        const calDoc = doc(this.firestore, 'calendarios', uid);
+                        await setDoc(calDoc, { estadosDias: {} });
+
+                        // Crear documento de paquetes con paquetes por defecto
+                        const packDoc = doc(this.firestore, 'paquetes', uid);
+                        await setDoc(packDoc, {
+                            paquetes: [
+                                { icon: '🎵', titulo: 'Standard Wedding Package', descripcion: 'Paquete completo para bodas', precio: '$1,200' },
+                                { icon: '🎧', titulo: 'Club Night', descripcion: 'Música para discotecas', precio: '$800' },
+                                { icon: '🏢', titulo: 'Corporate Event', descripcion: 'Eventos corporativos', precio: '$1,500' }
+                            ]
+                        });
+                    }
+                });
             })
             .then(() => {
                 this.successMsg = '¡Usuario registrado correctamente!';

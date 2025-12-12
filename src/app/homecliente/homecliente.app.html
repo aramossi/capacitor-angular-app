@@ -1,7 +1,164 @@
-<div class="homecliente-container">
-    <h2>Bienvenido, Cliente</h2>
-    <p>Aquí irá el dashboard para clientes.</p>
-    <div class="home-message">
-        <h1>Bienvenido Cliente</h1>
-        <p>Esta sección está en mantenimiento.<br>Pronto estará disponible.</p>
+<div class="homecliente-background">
+    <!-- Menú de navegación superior -->
+    <nav class="top-bar-menu">
+        <div class="cliente-menu">
+            <button class="modern-back-btn" (click)="irHome()" title="Principal">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Principal</span>
+            </button>
+            <button class="modern-back-btn" (click)="cerrarSesion()" title="Cerrar sesión">
+                <span class="menu-icon">⏻</span>
+                <span class="menu-text">Cerrar sesión</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="cliente-container">
+        <header class="cliente-header">
+            <div class="welcome-section">
+                <h1 class="welcome-title">¡Bienvenido, <span class="nombre-cliente">{{ nombreCliente }}</span>!</h1>
+                <p class="welcome-subtitle">🎵 Descubre al DJ ideal que transformará tu evento en una experiencia
+                    inolvidable</p>
+                <p class="welcome-description">Explora nuestros artistas profesionales, revisa su estilo musical y elige
+                    el que mejor se adapte a tu celebración</p>
+            </div>
+            <div class="header-divider"></div>
+            <h2 class="djs-title">DJs Disponibles</h2>
+        </header>
+
+        <!-- Indicador de carga -->
+        <div *ngIf="cargando" class="loading-container">
+            <span class="loading-icon">⏳</span>
+            <p>Cargando DJs...</p>
+        </div>
+
+        <!-- Lista de DJs -->
+        <div *ngIf="!cargando" class="djs-grid">
+            <div class="dj-card" *ngFor="let dj of djs">
+                <!-- Avatar del DJ -->
+                <div class="dj-avatar">
+                    <img [src]="dj.avatar || getDefaultAvatar()" [alt]="dj.nombreArtistico || dj.nombre"
+                        [title]="dj.nombreArtistico || dj.nombre">
+                </div>
+
+                <!-- Información del DJ -->
+                <div class="dj-info">
+                    <h3 class="dj-nombre">{{ dj.nombreArtistico || dj.nombre + ' ' + dj.apellido }}</h3>
+                    <p class="dj-descripcion">{{ dj.descripcion || 'DJ profesional' }}</p>
+
+                    <!-- Géneros musicales -->
+                    <div class="dj-generos" *ngIf="dj.generos">
+                        <span class="genero-chip">{{ dj.generos }}</span>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="dj-actions">
+                    <button class="contactar-btn secondary" (click)="verCalendario(dj)">
+                        <span>📅</span> Disponibilidad
+                    </button>
+                    <button class="contactar-btn" (click)="contactarDJ(dj)">
+                        <span>✉️</span> Contactar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mensaje si no hay DJs -->
+            <div *ngIf="djs.length === 0" class="no-djs">
+                <p>No hay DJs disponibles en este momento.</p>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal del calendario -->
+    <div *ngIf="calendarioVisible" class="calendario-modal">
+        <div class="calendario-contenido">
+            <button class="cerrar-modal" (click)="cerrarCalendario()">✕</button>
+
+            <div class="modal-header">
+                <h2>{{ djSeleccionado?.nombreArtistico || djSeleccionado?.nombre }}</h2>
+                <p>Revisa la disponibilidad antes de contactar</p>
+            </div>
+
+            <!-- Calendario -->
+            <div class="calendar-wrapper">
+                <div class="calendar-month">
+                    <button class="month-arrow" (click)="cambiarMes(-1)">&#8592;</button>
+                    {{ meses[mesActual] }} {{ anioActual }}
+                    <button class="month-arrow" (click)="cambiarMes(1)">&#8594;</button>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-day-label" *ngFor="let d of diasSemana">{{d}}</div>
+                    <ng-container *ngFor="let day of diasMes">
+                        <div [ngClass]="getDayClass(day)" class="calendar-day">
+                            <ng-container *ngIf="day && day.num > 0">{{day.num}}</ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- Leyenda -->
+                <div class="calendar-legend">
+                    <span class="legend available">Disponible</span>
+                    <span class="legend busy">Ocupado</span>
+                    <span class="legend tentative">Propuesta</span>
+                </div>
+            </div>
+
+            <!-- Botón de contacto -->
+            <button class="modal-contactar-btn" (click)="contactarDJ(djSeleccionado!)">
+                <span>✉️</span> Enviar solicitud
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal del formulario de contacto -->
+    <div *ngIf="formularioVisible" class="formulario-modal">
+        <div class="formulario-contenido">
+            <button class="cerrar-modal" (click)="cerrarFormulario()">✕</button>
+
+            <div class="modal-header">
+                <h2>Contactar a {{ djSeleccionado?.nombreArtistico || djSeleccionado?.nombre }}</h2>
+                <p>Completa los datos para solicitar el servicio</p>
+            </div>
+
+            <form class="formulario-contacto" (ngSubmit)="enviarSolicitud()">
+                <div class="form-group">
+                    <label>Tipo de evento</label>
+                    <input type="text" [(ngModel)]="tipoEvento" name="tipoEvento"
+                        placeholder="Ej: Boda, Cumpleaños, Fiesta corporativa..." class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha del evento</label>
+                    <input type="date" [(ngModel)]="fechaEvento" name="fechaEvento" class="form-input"
+                        title="Fecha del evento" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tu número de teléfono</label>
+                    <input type="tel" [(ngModel)]="telefonoCliente" name="telefonoCliente" placeholder="999 999 999"
+                        class="form-input" required>
+                </div>
+
+                <div *ngIf="mensajeContacto" class="mensaje-exito">
+                    {{ mensajeContacto }}
+                </div>
+
+                <div *ngIf="errorContacto" class="mensaje-error">
+                    {{ errorContacto }}
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancelar" (click)="cerrarFormulario()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-enviar">
+                        Enviar solicitud
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

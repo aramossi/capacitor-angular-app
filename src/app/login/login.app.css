@@ -12,7 +12,7 @@
 .register-error-modal .modal-content {
     background: #e53935;
     color: #fff;
-    padding: 16px 32px;
+    padding: 22px 38px;
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -25,12 +25,12 @@
     position: absolute;
     top: 6px;
     right: 12px;
-    font-size: 22px;
+    font-size: 28px;
     cursor: pointer;
 }
 
 .logo-img img {
-    width: 120px;
+    width: 126px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
@@ -58,11 +58,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 22px;
 }
 
 .logo-img img {
-    width: 120px;
+    width: 126px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
@@ -72,7 +72,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 22px;
 }
 
 .register-btn {
@@ -81,10 +81,10 @@
     color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 0.7rem 1.2rem;
-    font-size: 1.05rem;
+    padding: 17.2px 25.2px;
+    font-size: 22.8px;
     font-weight: bold;
-    margin-top: 1rem;
+    margin-top: 22px;
     text-decoration: none;
     transition: background 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -114,9 +114,9 @@
 
 .login-title {
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
-    font-size: 2.5rem;
+    font-size: 46px;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 38px;
     letter-spacing: 2px;
     color: #fff;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
@@ -128,7 +128,14 @@
     background: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 22px;
+}
+
+.login-form label {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
 }
 
 .input-group {
@@ -136,13 +143,14 @@
     align-items: center;
     background: #181730;
     border-radius: 8px;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.5rem;
+    padding: 14px 14px;
+    margin-bottom: 14px;
 }
 
 .input-group .icon {
     color: #b3aefc;
-    margin-right: 0.5rem;
+    margin-right: 2px;
+    font-size: 16px;
 }
 
 .input-group input {
@@ -150,23 +158,24 @@
     border: none;
     color: #fff;
     flex: 1;
-    font-size: 1rem;
+    font-size: 22px;
     outline: none;
 }
 
 .input-group .eye {
     cursor: pointer;
-    margin-left: 0.5rem;
+    margin-left: 10px;
+    font-size: 20px;
 }
 
 .forgot {
     text-align: right;
-    margin-bottom: 1rem;
+    margin-bottom: 22px;
 }
 
 .forgot a {
     color: #b3aefc;
-    font-size: 0.95rem;
+    font-size: 21.2px;
     text-decoration: underline;
 }
 
@@ -175,11 +184,11 @@
     color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 0.8rem;
-    font-size: 1.1rem;
+    padding: 18.8px;
+    font-size: 23.6px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 0.5rem;
+    margin-top: 14px;
     transition: background 0.2s;
 }
 
@@ -188,9 +197,9 @@
 }
 
 .register {
-    margin-top: 2rem;
+    margin-top: 38px;
     color: #b3aefc;
-    font-size: 1rem;
+    font-size: 22px;
     text-align: center;
 }
 

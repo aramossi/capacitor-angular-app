@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { CalendarDay, Paquete, Notificacion } from '../models/user.model';
+import { CalendarDay, Paquete, Notificacion, Solicitud, AgendaGuardada } from '../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     standalone: true,
@@ -14,6 +15,7 @@ import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 })
 export class HomeDjPageApp {
     menuAbierto = false;
+    isNativePlatform: boolean = Capacitor.isNativePlatform();
     meses = [
         'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -31,6 +33,8 @@ export class HomeDjPageApp {
     userId: string = '';
     // Notificaciones de contacto de clientes
     notificaciones: Notificacion[] = [];
+    // Solicitudes de clientes
+    solicitudes: Solicitud[] = [];
 
     // Agenda para días ocupados y propuestas
     agendaFormVisible: boolean = false;
@@ -40,7 +44,7 @@ export class HomeDjPageApp {
     agendaTelefono: string = '';
     agendaDescripcion: string = '';
     agendaTipoFormulario: 'busy' | 'tentative' | null = null;
-    agendasGuardadas: { [key: string]: any } = {};
+    agendasGuardadas: { [key: string]: AgendaGuardada } = {};
 
     private router = inject(Router);
     private firestore = inject(Firestore);
@@ -94,7 +98,27 @@ export class HomeDjPageApp {
         } else {
             this.agendasGuardadas = {};
         }
+        // Cargar solicitudes de clientes
+        await this.cargarSolicitudes();
         this.cargando = false;
+    }
+
+    async cargarSolicitudes() {
+        try {
+            const solicitudesRef = collection(this.firestore, 'solicitudes');
+            const q = query(solicitudesRef, where('djId', '==', this.userId));
+            const querySnapshot = await getDocs(q);
+
+            this.solicitudes = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            console.log('Solicitudes cargadas:', this.solicitudes);
+        } catch (error) {
+            console.error('Error al cargar solicitudes:', error);
+            this.solicitudes = [];
+        }
     }
 
     irHome() {
@@ -211,7 +235,7 @@ export class HomeDjPageApp {
     }
 
     async guardarAgenda() {
-        const agendaInfo: any = {
+        const agendaInfo: AgendaGuardada = {
             fecha: this.agendaFecha,
             persona: this.agendaPersona,
             telefono: this.agendaTelefono,

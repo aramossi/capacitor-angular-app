@@ -1,6 +1,6 @@
 <div class="notificaciones-background">
     <!-- Menú de botones modernos compactos -->
-    <nav class="top-bar-menu">
+    <nav class="top-bar-menu" [class.native-platform]="isNativePlatform">
         <div class="dj-perfil-menu">
             <button class="modern-back-btn" (click)="irHome()" title="Principal">
                 <span class="menu-icon">🏠</span>
@@ -30,31 +30,98 @@
     <!-- Contenido principal -->
     <div *ngIf="!cargando" class="notificaciones-container">
         <header class="notificaciones-header">
-            <h2>Mis Notificaciones</h2>
+            <h2>Notificaciones y Eventos</h2>
+            <div class="panel-tabs">
+                <button class="tab-btn" [class.active]="vistaActual === 'solicitudes'"
+                    (click)="cambiarVista('solicitudes')">
+                    📬 Solicitudes
+                </button>
+                <button class="tab-btn" [class.active]="vistaActual === 'eventos'" (click)="cambiarVista('eventos')">
+                    📅 Eventos
+                </button>
+            </div>
         </header>
 
-        <section class="notifications-section">
-            <div *ngIf="notificaciones.length === 0" class="no-notifications">
-                <p>No tienes notificaciones pendientes</p>
+        <!-- Sección de Solicitudes -->
+        <section class="solicitudes-section" *ngIf="vistaActual === 'solicitudes'">
+            <h3 class="section-title">📬 Solicitudes de Clientes</h3>
+
+            <div *ngIf="solicitudes.length === 0" class="no-items">
+                <p>No tienes solicitudes pendientes</p>
             </div>
 
-            <div class="notifications-list">
-                <div class="notification-card" *ngFor="let notif of notificaciones; let i = index">
-                    <div class="notification-header">
-                        <span class="notification-icon">📅</span>
-                        <div class="notification-info">
-                            <strong>{{notif.nombreCliente}}</strong>
-                            <span class="notification-date">{{notif.id}}</span>
+            <div class="solicitudes-list">
+                <div class="solicitud-card" *ngFor="let solicitud of solicitudes">
+                    <div class="solicitud-header">
+                        <div class="solicitud-avatar">👤</div>
+                        <div class="solicitud-info">
+                            <h4 class="solicitud-nombre">{{ solicitud.nombreCliente }}</h4>
+                            <p class="solicitud-fecha" *ngIf="solicitud.fecha">{{ solicitud.fecha.toDate ?
+                                solicitud.fecha.toDate() : solicitud.fecha }}</p>
                         </div>
                     </div>
-                    <div class="notification-message">{{notif.mensaje}}</div>
-                    <div class="notification-contact">
-                        <span class="contact-label">Teléfono:</span>
-                        <a [href]="'tel:' + notif.telefono" class="contact-phone">{{notif.telefono}}</a>
+
+                    <div class="solicitud-detalles">
+                        <div class="detalle-row">
+                            <span class="detalle-icono">🎉</span>
+                            <span class="detalle-label">Tipo de evento:</span>
+                        </div>
+                        <div class="detalle-valor">{{ solicitud.tipoEvento }}</div>
+
+                        <div class="detalle-row">
+                            <span class="detalle-icono">📅</span>
+                            <span class="detalle-label">Fecha del evento:</span>
+                        </div>
+                        <div class="detalle-valor">{{ solicitud.fechaEvento }}</div>
+
+                        <div class="detalle-row">
+                            <span class="detalle-icono">📱</span>
+                            <span class="detalle-label">Teléfono:</span>
+                        </div>
+                        <div class="detalle-valor">{{ solicitud.telefono }}</div>
                     </div>
-                    <button class="notification-delete-btn" (click)="eliminarNotificacion(i)" title="Marcar como leído">
-                        ✓
-                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Eventos -->
+        <section class="eventos-section" *ngIf="vistaActual === 'eventos'">
+            <h3 class="section-title">📅 Mis Eventos Agendados</h3>
+
+            <div *ngIf="eventos.length === 0" class="no-items">
+                <p>No tienes eventos agendados</p>
+            </div>
+
+            <div class="eventos-list">
+                <div class="evento-card" *ngFor="let evento of eventos; let i = index">
+                    <div class="card-header">
+                        <span class="card-icon">📅</span>
+                        <div class="card-info">
+                            <strong>{{ evento.persona }}</strong>
+                            <span class="card-date">{{ evento.fecha }}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="detail-item" *ngIf="evento.direccion">
+                            <span class="detail-label">📍 Dirección:</span>
+                            <span class="detail-value">{{ evento.direccion }}</span>
+                        </div>
+                        <div class="detail-item" *ngIf="evento.descripcion">
+                            <span class="detail-label">📝 Descripción:</span>
+                            <span class="detail-value">{{ evento.descripcion }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">📱 Teléfono:</span>
+                            <span class="detail-value">{{ evento.telefono }}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn-action btn-delete" (click)="eliminarEvento(i)" title="Eliminar evento">
+                            🗑️ Eliminar
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

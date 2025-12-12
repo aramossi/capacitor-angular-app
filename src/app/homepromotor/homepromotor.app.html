@@ -1,7 +1,214 @@
-<div class="homepromotor-container">
-    <h2>Bienvenido, Promotor</h2>
-    <p>Aquí irá el dashboard para promotores.</p>
-    <div class="home-message">
-        <h1>Bienvenido Promotor</h1>
-        <p>Esta sección está en mantenimiento.<br>Pronto estará disponible.</p>
+<div class="homepromotor-background">
+    <!-- Menú de navegación superior -->
+    <nav class="top-bar-menu">
+        <div class="promotor-menu">
+            <button class="modern-back-btn" (click)="irHome()" title="Principal">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Principal</span>
+            </button>
+            <button class="modern-back-btn" (click)="cerrarSesion()" title="Cerrar sesión">
+                <span class="menu-icon">⏻</span>
+                <span class="menu-text">Cerrar sesión</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="promotor-container">
+        <header class="promotor-header">
+            <div class="welcome-section">
+                <h1 class="welcome-title">¡Bienvenido, <span class="nombre-promotor">{{ nombrePromotor }}</span>!</h1>
+                <p class="welcome-subtitle" *ngIf="empresaPromotor">🏢 {{ empresaPromotor }}</p>
+                <p class="welcome-subtitle">🎤 Encuentra al DJ perfecto para tu evento profesional</p>
+                <p class="welcome-description">Explora nuestra cartera de artistas, revisa su disponibilidad y envía
+                    propuestas detalladas</p>
+            </div>
+
+            <!-- Filtros de búsqueda -->
+            <div class="filtros-section">
+                <div class="filtro-grupo">
+                    <label class="filtro-label">🎵 Filtrar por género:</label>
+                    <select [(ngModel)]="filtroGenero" class="filtro-select" title="Filtrar por género musical">
+                        <option value="">Todos los géneros</option>
+                        <option *ngFor="let genero of generosDisponibles" [value]="genero">{{ genero }}</option>
+                    </select>
+                </div>
+
+                <div class="filtro-grupo">
+                    <label class="filtro-label">🔍 Buscar por nombre:</label>
+                    <input type="text" [(ngModel)]="busquedaNombre" placeholder="Nombre del DJ..." class="filtro-input">
+                </div>
+
+                <button class="btn-limpiar" (click)="limpiarFiltros()" *ngIf="filtroGenero || busquedaNombre">
+                    ✕ Limpiar filtros
+                </button>
+            </div>
+
+            <div class="header-divider"></div>
+            <h2 class="djs-title">DJs Profesionales ({{ djsFiltrados.length }})</h2>
+        </header>
+
+        <!-- Indicador de carga -->
+        <div *ngIf="cargando" class="loading-container">
+            <span class="loading-icon">⏳</span>
+            <p>Cargando DJs...</p>
+        </div>
+
+        <!-- Lista de DJs -->
+        <div *ngIf="!cargando" class="djs-grid">
+            <div class="dj-card" *ngFor="let dj of djsFiltrados">
+                <!-- Avatar del DJ -->
+                <div class="dj-avatar">
+                    <img [src]="dj.avatar || 'assets/avatar-dj-default.jpg'" [alt]="dj.nombreArtistico || dj.nombre"
+                        [title]="dj.nombreArtistico || dj.nombre">
+                </div>
+
+                <!-- Información del DJ -->
+                <div class="dj-info">
+                    <h3 class="dj-nombre">{{ dj.nombreArtistico || dj.nombre + ' ' + dj.apellido }}</h3>
+                    <p class="dj-descripcion">{{ dj.descripcion || 'DJ profesional' }}</p>
+
+                    <!-- Géneros musicales -->
+                    <div class="dj-generos" *ngIf="dj.generos">
+                        <span class="genero-chip">{{ dj.generos }}</span>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="dj-actions">
+                    <button class="contactar-btn secondary" (click)="verCalendario(dj)">
+                        <span>📅</span> Ver disponibilidad
+                    </button>
+                    <button class="contactar-btn" (click)="enviarPropuesta(dj)">
+                        <span>📝</span> Propuesta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mensaje si no hay DJs -->
+            <div *ngIf="djsFiltrados.length === 0" class="no-djs">
+                <p>No se encontraron DJs con los filtros seleccionados.</p>
+                <button class="btn-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal del calendario -->
+    <div *ngIf="calendarioVisible" class="calendario-modal">
+        <div class="calendario-contenido">
+            <button class="cerrar-modal" (click)="cerrarCalendario()">✕</button>
+
+            <div class="modal-header">
+                <h2>{{ djSeleccionado?.nombreArtistico || djSeleccionado?.nombre }}</h2>
+                <p>Revisa la disponibilidad antes de enviar tu propuesta</p>
+            </div>
+
+            <!-- Calendario -->
+            <div class="calendar-wrapper">
+                <div class="calendar-month">
+                    <button class="month-arrow" (click)="cambiarMes(-1)">&#8592;</button>
+                    {{ meses[mesActual] }} {{ anioActual }}
+                    <button class="month-arrow" (click)="cambiarMes(1)">&#8594;</button>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-day-label" *ngFor="let d of diasSemana">{{d}}</div>
+                    <ng-container *ngFor="let day of diasMes">
+                        <div [ngClass]="getDayClass(day)" class="calendar-day">
+                            <ng-container *ngIf="day && day.num > 0">{{day.num}}</ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- Leyenda -->
+                <div class="calendar-legend">
+                    <span class="legend available">Disponible</span>
+                    <span class="legend busy">Ocupado</span>
+                    <span class="legend tentative">Propuesta</span>
+                </div>
+            </div>
+
+            <!-- Botón de propuesta -->
+            <button class="modal-contactar-btn" (click)="enviarPropuesta(djSeleccionado!)">
+                <span>📝</span> Enviar propuesta profesional
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal del formulario de propuesta -->
+    <div *ngIf="propuestaVisible" class="formulario-modal">
+        <div class="formulario-contenido propuesta-amplia">
+            <button class="cerrar-modal" (click)="cerrarPropuesta()">✕</button>
+
+            <div class="modal-header">
+                <h2>Propuesta profesional para {{ djSeleccionado?.nombreArtistico || djSeleccionado?.nombre }}</h2>
+                <p>Completa los detalles del evento para una respuesta rápida</p>
+            </div>
+
+            <form class="formulario-propuesta" (ngSubmit)="guardarPropuesta()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo de evento <span class="required">*</span></label>
+                        <input type="text" [(ngModel)]="tipoEvento" name="tipoEvento"
+                            placeholder="Ej: Concierto, Festival, Evento corporativo..." class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha del evento <span class="required">*</span></label>
+                        <input type="date" [(ngModel)]="fechaEvento" name="fechaEvento" class="form-input"
+                            title="Fecha del evento" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hora de inicio</label>
+                        <input type="time" [(ngModel)]="horaInicio" name="horaInicio" class="form-input"
+                            title="Hora de inicio">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hora de fin</label>
+                        <input type="time" [(ngModel)]="horaFin" name="horaFin" class="form-input" title="Hora de fin">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Lugar del evento <span class="required">*</span></label>
+                    <input type="text" [(ngModel)]="lugarEvento" name="lugarEvento"
+                        placeholder="Dirección completa del evento" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Detalles adicionales del evento</label>
+                    <textarea [(ngModel)]="detallesEvento" name="detallesEvento"
+                        placeholder="Describe el tipo de música, ambiente, requisitos técnicos, etc."
+                        class="form-textarea" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono de contacto <span class="required">*</span></label>
+                    <input type="tel" [(ngModel)]="telefonoContacto" name="telefonoContacto" placeholder="999 999 999"
+                        class="form-input" required>
+                </div>
+
+                <div *ngIf="mensajePropuesta" class="mensaje-exito">
+                    {{ mensajePropuesta }}
+                </div>
+
+                <div *ngIf="errorPropuesta" class="mensaje-error">
+                    {{ errorPropuesta }}
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancelar" (click)="cerrarPropuesta()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-enviar">
+                        📤 Enviar propuesta profesional
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

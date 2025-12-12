@@ -1,24 +1,37 @@
-/* Barra superior de navegación con botones modernos - FIJA EN LA PARTE SUPERIOR */
+/* Barra superior de navegación con botones modernos */
 .top-bar-menu {
-    width: 100vw;
-    background: var(--color-surface);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
-    padding: 0.5rem 0;
-    position: fixed;
-    /* Cambiado a fixed para que siempre esté arriba */
-    top: 0;
-    left: 0;
-    z-index: 4000;
+    width: 100%;
+    max-width: 100%;
+    margin: 24px 0 0 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+/* Estilo para plataforma nativa (Android/iOS) - barra fija */
+.top-bar-menu.native-platform {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    z-index: 9999;
+    background: #18192b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Menú horizontal de botones compactos */
 .dj-perfil-menu {
     display: flex;
-    gap: 0.7rem;
-    margin: 0.5rem;
+    gap: 11.2px;
+    margin: 8px;
 }
 
 /* Botones modernos con icono visible y texto que aparece al hover */
@@ -27,8 +40,8 @@
     color: #fff;
     border: none;
     border-radius: 50%;
-    padding: 0.8rem;
-    font-size: 1rem;
+    padding: 12.8px;
+    font-size: 16px;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -47,16 +60,16 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     width: auto;
-    padding: 0.8rem 1.2rem;
+    padding: 12.8px 19.2px;
 }
 
 .menu-icon {
-    font-size: 1.3rem;
+    font-size: 20.8px;
 }
 
 .menu-text {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 16px;
     max-width: 0;
     overflow: hidden;
     margin-left: 0;
@@ -66,14 +79,14 @@
 
 .modern-back-btn:hover .menu-text {
     max-width: 200px;
-    margin-left: 0.5rem;
+    margin-left: 8px;
     opacity: 1;
 }
 
 /* Icono dentro de los botones del menú superior */
 .menu-icon-bar {
-    font-size: 1.3rem;
-    margin-right: 0.2rem;
+    font-size: 20.8px;
+    margin-right: 3.2px;
     filter: drop-shadow(0 2px 4px #23243a44);
 }
 
@@ -88,11 +101,11 @@
 .service-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
     background: #292a3d;
     border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 16px;
+    margin-bottom: 16px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
 }
 
@@ -101,7 +114,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 /* Inputs editables en la información del servicio */
@@ -111,9 +124,9 @@
     background: #1a1b2e;
     border: 1px solid #3a3b4f;
     border-radius: 6px;
-    padding: 0.6rem;
+    padding: 9.6px;
     color: #fff;
-    font-size: 0.9rem;
+    font-size: 14.4px;
     font-family: 'Poppins', Arial, sans-serif;
     transition: border-color 0.3s;
     width: 100%;
@@ -141,12 +154,12 @@
 
 /* Descripción del servicio */
 .service-description {
-    margin-top: 0.3rem;
+    margin-top: 4.8px;
 }
 
 .description-text {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
+    font-size: 13.6px;
     font-style: italic;
     line-height: 1.4;
     display: block;
@@ -156,38 +169,38 @@
 .service-actions {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
     align-items: flex-end;
 }
 
 /* Icono de edición de servicio */
 .edit-icon {
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 19.2px;
     color: #b3aefc;
-    margin-bottom: 0.2rem;
+    margin-bottom: 3.2px;
 }
 
 /* Botón eliminar servicio */
 .delete-btn {
-    background: #e53935;
+    background: #1e3a8a;
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 0.3rem 0.7rem;
-    font-size: 1rem;
+    padding: 4.8px 11.2px;
+    font-size: 16px;
     cursor: pointer;
-    margin-bottom: 0.2rem;
+    margin-bottom: 3.2px;
 }
 
 /* Botón guardar servicio */
 .save-btn {
-    background: #2ecc40;
+    background: #007aff;
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 0.3rem 0.7rem;
-    font-size: 1rem;
+    padding: 4.8px 11.2px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -197,8 +210,8 @@
     width: 100vw;
     margin: 0;
     padding: 0;
-    padding-top: 70px;
-    /* Espacio para la barra fija superior */
+    padding-top: 24px;
+    /* Espacio superior */
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
     color: #fff;
     /* Puedes usar un color sólido o un degradado como en login: */
@@ -206,6 +219,11 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+}
+
+/* Padding extra para Android cuando el menú está fijo */
+.homedj-background:has(.top-bar-menu.native-platform) {
+    padding-top: 90px;
 }
 
 /* Contenedor principal del calendario */
@@ -223,19 +241,21 @@
 /* Encabezado del calendario, con fondo y alineación */
 .calendar-header {
     width: 100%;
+    max-width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding: 1.2rem 1.5rem 0.5rem 1.5rem;
+    justify-content: center;
+    padding: 19.2px 24px 8px 24px;
     background: #18192b;
     box-sizing: border-box;
+    margin: 0;
 }
 
 /* Título del calendario */
 .calendar-header h2 {
     flex: 1;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 700;
     margin: 0;
     color: #fff;
@@ -244,9 +264,9 @@
 
 /* Icono de menú (ya no se usa, pero se mantiene por si se reutiliza) */
 .menu-icon {
-    font-size: 1.5rem;
+    font-size: 24px;
     color: #fff;
-    margin-right: 1rem;
+    margin-right: 16px;
     cursor: pointer;
 }
 
@@ -254,29 +274,29 @@
 .calendar-section {
     width: 100%;
     max-width: 400px;
-    margin: 1.5rem auto 0 auto;
+    margin: 24px auto 0 auto;
     background: #23243a;
     border-radius: 18px;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
-    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    padding: 24px 19.2px 19.2px 19.2px;
 }
 
 /* Mockup visual del calendario */
 .calendar-mockup {
-    margin-bottom: 1.2rem;
+    margin-bottom: 19.2px;
 }
 
 /* Barra de mes del calendario, con flechas y nombre */
 .calendar-month {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 17.6px;
     font-weight: 600;
-    margin-bottom: 0.7rem;
+    margin-bottom: 11.2px;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.2rem;
+    gap: 19.2px;
 }
 
 /* Flechas para cambiar de mes */
@@ -284,9 +304,9 @@
     background: none;
     border: none;
     color: #b3aefc;
-    font-size: 1.5rem;
+    font-size: 24px;
     cursor: pointer;
-    padding: 0 0.5rem;
+    padding: 0 8px;
     transition: color 0.2s;
 }
 
@@ -299,14 +319,14 @@
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.3rem;
-    margin-bottom: 0.7rem;
+    gap: 4.8px;
+    margin-bottom: 11.2px;
 }
 
 /* Etiquetas de los días de la semana */
 .calendar-day-label {
     color: #b3aefc;
-    font-size: 0.95rem;
+    font-size: 15.2px;
     text-align: center;
     font-weight: 500;
 }
@@ -319,26 +339,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 500;
     margin: 0 auto;
 }
 
 /* Día disponible */
 .day-available {
-    background: #2ecc40;
-    color: #fff;
+    background: #00E5FF;
+    color: #18192b;
 }
 
 /* Día ocupado */
 .day-busy {
-    background: #e53935;
+    background: #0052CC;
     color: #fff;
 }
 
 /* Día tentativo */
 .day-tentative {
-    background: #ffb300;
+    background: #5C6BC0;
     color: #fff;
 }
 
@@ -351,33 +371,33 @@
 .calendar-legend {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 /* Estilo base de cada leyenda */
 .legend {
-    padding: 0.3rem 1.1rem;
+    padding: 4.8px 17.6px;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 15.2px;
     font-weight: 600;
-    margin-right: 0.5rem;
+    margin-right: 8px;
 }
 
 /* Leyenda: disponible */
 .legend.available {
-    background: #2ecc40;
-    color: #fff;
+    background: #00E5FF;
+    color: #18192b;
 }
 
 /* Leyenda: ocupado */
 .legend.busy {
-    background: #e53935;
+    background: #0052CC;
     color: #fff;
 }
 
 /* Leyenda: tentativo */
 .legend.tentative {
-    background: #ffb300;
+    background: #5C6BC0;
     color: #fff;
 }
 
@@ -391,17 +411,17 @@
 .agenda-form {
     background: #292a3d;
     border-radius: 12px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
+    padding: 24px;
+    margin-top: 24px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     border: 2px solid #007aff;
 }
 
 .agenda-form h4 {
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 17.6px;
     font-weight: 600;
-    margin: 0 0 1rem 0;
+    margin: 0 0 16px 0;
     text-align: center;
     letter-spacing: 0.5px;
 }
@@ -412,10 +432,10 @@
     background: #1a1b2e;
     border: 1px solid #3a3b4f;
     border-radius: 8px;
-    padding: 0.8rem;
+    padding: 12.8px;
     color: #fff;
-    font-size: 0.95rem;
-    margin-bottom: 0.8rem;
+    font-size: 15.2px;
+    margin-bottom: 12.8px;
     box-sizing: border-box;
     transition: border-color 0.3s;
 }
@@ -435,15 +455,15 @@
 .agenda-form-buttons {
     display: flex;
     gap: 2%;
-    margin-top: 0.5rem;
+    margin-top: 8px;
 }
 
 .agenda-form button {
     flex: 1;
-    padding: 0.8rem;
+    padding: 12.8px;
     border: none;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 15.2px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
@@ -461,13 +481,13 @@
 }
 
 .agenda-form button:last-child {
-    background: #e53935;
+    background: #1e3a8a;
     color: #fff;
 }
 
 .agenda-form button:last-child:hover {
-    background: #c62828;
-    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+    background: #1e40af;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
     transform: translateY(-2px);
 }
 
@@ -475,11 +495,11 @@
 .service-section {
     width: 100%;
     max-width: 400px;
-    margin: 2rem auto 0 auto;
+    margin: 32px auto 0 auto;
     background: #23243a;
     border-radius: 18px;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
-    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    padding: 24px 19.2px 19.2px 19.2px;
 }
 
 /* Encabezado de la sección de servicios */
@@ -487,13 +507,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 /* Título de la sección de servicios */
 .service-header h3 {
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 17.6px;
     font-weight: 600;
     margin: 0;
     letter-spacing: 1px;
@@ -507,9 +527,9 @@
     border-radius: 50%;
     width: 38px;
     height: 38px;
-    font-size: 1.6rem;
+    font-size: 25.6px;
     font-weight: bold;
-    margin-left: 0.7rem;
+    margin-left: 11.2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
     cursor: pointer;
     transition: background 0.2s;
@@ -528,10 +548,10 @@
 
 /* Sección de notificaciones */
 .notifications-section {
-    margin-top: 2rem;
+    margin-top: 32px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 24px;
     -webkit-backdrop-filter: blur(10px);
     /* Soporte para Safari */
     backdrop-filter: blur(10px);
@@ -541,13 +561,13 @@
 .notifications-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 16px;
 }
 
 /* Mensaje de no hay notificaciones */
 .no-notifications {
     text-align: center;
-    padding: 2rem;
+    padding: 32px;
     color: rgba(255, 255, 255, 0.6);
 }
 
@@ -560,7 +580,7 @@
 .notification-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 16px;
     border-left: 3px solid #007aff;
     position: relative;
     transition: all 0.2s;
@@ -575,13 +595,13 @@
 .notification-header {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.7rem;
+    gap: 12.8px;
+    margin-bottom: 11.2px;
 }
 
 /* Ícono de notificación */
 .notification-icon {
-    font-size: 1.5rem;
+    font-size: 24px;
     width: 35px;
     height: 35px;
     display: flex;
@@ -596,25 +616,25 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 3.2px;
 }
 
 .notification-info strong {
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 15.2px;
 }
 
 /* Fecha de la notificación */
 .notification-date {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 0.75rem;
+    font-size: 12px;
 }
 
 /* Mensaje de la notificación */
 .notification-message {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    margin: 0.5rem 0;
+    font-size: 14.4px;
+    margin: 8px 0;
     line-height: 1.4;
 }
 
@@ -622,17 +642,17 @@
 .notification-contact {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem;
+    gap: 8px;
+    padding: 9.6px;
     background: rgba(0, 122, 255, 0.1);
     border-radius: 5px;
-    margin-top: 0.7rem;
+    margin-top: 11.2px;
 }
 
 /* Etiqueta de contacto */
 .contact-label {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
+    font-size: 13.6px;
 }
 
 /* Teléfono de contacto */
@@ -640,7 +660,7 @@
     color: #007aff;
     font-weight: 600;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 15.2px;
     transition: color 0.2s;
 }
 
@@ -652,15 +672,15 @@
 /* Botón para eliminar notificación */
 .notification-delete-btn {
     position: absolute;
-    top: 0.7rem;
-    right: 0.7rem;
+    top: 11.2px;
+    right: 11.2px;
     background: rgba(0, 200, 100, 0.2);
     color: #00ff88;
     border: none;
     border-radius: 50%;
     width: 28px;
     height: 28px;
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.2s;
 }

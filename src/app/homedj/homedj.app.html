@@ -1,6 +1,6 @@
 <div class="homedj-background">
     <!-- Menú de botones modernos compactos -->
-    <nav class="top-bar-menu">
+    <nav class="top-bar-menu" [class.native-platform]="isNativePlatform">
         <div class="dj-perfil-menu">
             <button class="modern-back-btn" (click)="irHome()" title="Principal">
                 <span class="menu-icon">🏠</span>
