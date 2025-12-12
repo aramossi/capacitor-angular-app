@@ -254,14 +254,6 @@
     margin: 24px 0;
 }
 
-.djs-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #00E5FF;
-    margin: 0;
-    text-align: center;
-}
-
 .filtro-generos {
     display: flex;
     flex-wrap: wrap;
@@ -469,18 +461,6 @@
     border-color: #00E5FF;
 }
 
-/* Siguiente sección */
-.siguiente-seccion {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 11.2px;
-    justify-content: center;
-    margin-bottom: 22px;
-}
-
-/* Géneros duplicados - eliminar */
-/* .genero-chip ya está definido arriba */
-
 /* Estado de disponibilidad */
 .dj-disponibilidad {
     text-align: center;
@@ -497,49 +477,6 @@
     color: #5C6BC0;
     font-size: 14px;
     font-weight: 600;
-}
-
-/* Botones de acción duplicados - ya definidos arriba */
-/* .dj-actions ya está definido */
-}
-
-.btn-propuesta,
-/* Botones duplicados - limpiar definiciones antiguas */
-.btn-contactar,
-.contactar-btn {
-    /* Ya definidos arriba en .contactar-btn, .propuesta-btn */
-}
-
-/* Botón Propuesta (principal) */
-.btn-propuesta,
-.contactar-btn:not(.secondary) {
-    /* Ya definidos arriba */
-}
-
-.btn-propuesta:hover,
-.contactar-btn:not(.secondary):hover {
-    /* Ya definidos arriba */
-}
-
-.btn-propuesta:active,
-.contactar-btn:not(.secondary):active {
-    /* Ya definidos arriba */
-}
-
-/* Botón Ver disponibilidad (secundario) */
-.btn-contactar,
-.contactar-btn.secondary {
-    /* Ya definidos arriba */
-}
-
-.btn-contactar:hover,
-.contactar-btn.secondary:hover {
-    /* Ya definidos arriba */
-}
-
-.btn-contactar:active,
-.contactar-btn.secondary:active {
-    /* Ya definidos arriba */
 }
 
 /* Iconos en los botones */
