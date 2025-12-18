@@ -56,8 +56,7 @@
                         <div class="solicitud-avatar">👤</div>
                         <div class="solicitud-info">
                             <h4 class="solicitud-nombre">{{ solicitud.nombreCliente }}</h4>
-                            <p class="solicitud-fecha" *ngIf="solicitud.fecha">{{ solicitud.fecha.toDate ?
-                                solicitud.fecha.toDate() : solicitud.fecha }}</p>
+                            <p class="solicitud-fecha" *ngIf="solicitud.fecha">{{ formatearFecha(solicitud.fecha) }}</p>
                         </div>
                     </div>
 

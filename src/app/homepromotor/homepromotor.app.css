@@ -663,43 +663,39 @@
     border: 2px solid transparent;
 }
 
-.calendar-day.available {
-    background: rgba(0, 229, 255, 0.2);
-    color: #00E5FF;
-    border-color: rgba(0, 229, 255, 0.4);
+/* Día disponible */
+.calendar-day.day-available {
+    background: #00E5FF;
+    color: #18192b;
 }
 
-.calendar-day.available:hover {
-    background: rgba(0, 229, 255, 0.3);
-    border-color: #00E5FF;
+.calendar-day.day-available:hover {
     transform: scale(1.05);
 }
 
-.calendar-day.busy {
-    background: rgba(0, 82, 204, 0.3);
-    color: #0052CC;
-    border-color: rgba(0, 82, 204, 0.5);
+/* Día ocupado */
+.calendar-day.day-busy {
+    background: #0052CC;
+    color: #fff;
 }
 
-.calendar-day.busy:hover {
-    background: rgba(0, 82, 204, 0.4);
-    border-color: #0052CC;
+.calendar-day.day-busy:hover {
+    transform: scale(1.05);
 }
 
-.calendar-day.tentative {
-    background: rgba(92, 107, 192, 0.2);
-    color: #5C6BC0;
-    border-color: rgba(92, 107, 192, 0.4);
+/* Día tentativo */
+.calendar-day.day-tentative {
+    background: #5C6BC0;
+    color: #fff;
 }
 
-.calendar-day.tentative:hover {
-    background: rgba(92, 107, 192, 0.3);
-    border-color: #5C6BC0;
+.calendar-day.day-tentative:hover {
+    transform: scale(1.05);
 }
 
-.calendar-day.today {
-    border: 2px solid #fff;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+/* Día actual */
+.calendar-day.day-today {
+    border: 2px solid #b3aefc;
 }
 
 /* Leyenda del calendario */
@@ -724,22 +720,22 @@
     border: 1px solid;
 }
 
+/* Leyenda: disponible */
 .legend.available {
-    background: rgba(0, 229, 255, 0.2);
-    color: #00E5FF;
-    border-color: rgba(0, 229, 255, 0.4);
+    background: #00E5FF;
+    color: #18192b;
 }
 
+/* Leyenda: ocupado */
 .legend.busy {
-    background: rgba(0, 82, 204, 0.3);
-    color: #0052CC;
-    border-color: rgba(0, 82, 204, 0.5);
+    background: #0052CC;
+    color: #fff;
 }
 
+/* Leyenda: tentativo */
 .legend.tentative {
-    background: rgba(92, 107, 192, 0.2);
-    color: #5C6BC0;
-    border-color: rgba(92, 107, 192, 0.4);
+    background: #5C6BC0;
+    color: #fff;
 }
 
 /* Botón de contactar en modal */

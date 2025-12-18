@@ -107,6 +107,27 @@ export class NotificacionesPageApp implements OnInit {
         this.vistaActual = vista;
     }
 
+    formatearFecha(fecha: any): string {
+        try {
+            const date = fecha.toDate ? fecha.toDate() : new Date(fecha);
+            
+            const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            
+            const diaSemana = diasSemana[date.getDay()];
+            const mes = meses[date.getMonth()];
+            const dia = date.getDate();
+            const año = date.getFullYear();
+            const horas = date.getHours().toString().padStart(2, '0');
+            const minutos = date.getMinutes().toString().padStart(2, '0');
+            const segundos = date.getSeconds().toString().padStart(2, '0');
+            
+            return `${diaSemana} ${mes} ${dia} ${año} ${horas}:${minutos}:${segundos} GMT-0500 (hora estándar de Perú)`;
+        } catch (error) {
+            return '';
+        }
+    }
+
     irHome() {
         this.router.navigate(['/homedj']);
     }
